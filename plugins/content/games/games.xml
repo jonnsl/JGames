@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="1.6" type="plugin" group="content">
-	<name>Content - Games</name>
+	<name>Content - JGames</name>
 	<author>Jonnathan Soares Lima</author>
 	<authorEmail>jonnsl@hotmail.com</authorEmail>
 	<copyright>(C) 2011 Copyleft - all rights reversed</copyright>

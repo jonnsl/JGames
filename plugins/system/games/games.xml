@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="1.6" type="plugin" group="system">
-	<name>plg_system_games</name>
+	<name>System - JGames</name>
 	<author>Jonnathan Soares Lima</author>
 	<authorEmail>jonnsl@hotmail.com</authorEmail>
 	<creationDate>March 2011</creationDate>
