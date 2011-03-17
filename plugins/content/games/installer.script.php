@@ -7,8 +7,9 @@ class plgContentGamesInstallerScript
 {
 	public function install()
 	{
+		$prefix = JFactory::getConfig()->get('dbprefix', 'jos_');
 		$db = JFactory::getDbo();
-		$db->setQuery('CREATE TABLE IF NOT EXISTS `#__games_content` (
+		$db->setQuery('CREATE TABLE IF NOT EXISTS `'.$prefix.'games_content` (
 				`content_id` integer NOT NULL,
 				`game_id` integer NOT NULL
 				) ENGINE=MyISAM  DEFAULT CHARSET=utf8');
@@ -17,15 +18,17 @@ class plgContentGamesInstallerScript
 
 	public function uninstall()
 	{
+		$prefix = JFactory::getConfig()->get('dbprefix', 'jos_');
 		$db = JFactory::getDbo();
-		$db->setQuery('DROP TABLE IF EXISTS `#__games_content`');
+		$db->setQuery('DROP TABLE IF EXISTS `'.$prefix.'games_content`');
 		return (bool)$db->query();
 	}
 	
 	public function postflight()
 	{
+		$prefix = JFactory::getConfig()->get('dbprefix', 'jos_');
 		$db = JFactory::getDbo();
-		$db->setQuery('UPDATE `#__extensions` SET `enabled` = 1 where `name` = "plg_content_games"');
+		$db->setQuery('UPDATE `'.$prefix.'extensions` SET `enabled` = 1 where `name` = "plg_content_games"');
 		return (bool)$db->query();
 	}
 }
