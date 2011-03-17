@@ -9,6 +9,7 @@
 /tmp
 /htaccess.txt
 /index.php
+/configuration.php
 /joomla.xml
 /LICENSE.txt
 /README.txt
@@ -318,3 +319,5 @@
 /plugins/system/sef
 /plugins/user
 /plugins/extension
+/installation.bkp
+/administrator/components/com_games/games.xml
