@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS `#__games`;DROP TABLE IF EXISTS `#__games_genre_map`;DROP TABLE IF EXISTS `#__games_platform_map`;DELETE FROM #_categories WHERE extension = "com_games.genres" OR extension = "com_games.platforms";

@@ -1,0 +1,70 @@
+.rating a img , #pegi #content a img{
+	margin: 4px;
+	float:none;
+}
+
+.rating a input, #pegi #content input {
+	display: none;
+}
+
+.rating a img:hover, #pegi #content a img:hover {
+	border: #FF6000 solid 2px;
+	margin: 2px;
+}
+
+.rating a.selected img, #pegi #content a.selected img{
+	border: #1874CD solid 2px;
+	margin: 2px;
+}
+
+.rating p, #esrb p{
+	margin: 15px 0px 0px 0px;
+}
+
+.boxart_holder {
+	width: 120px;
+	height: 100%;
+	padding: 2px;
+	border: 1px #ccc solid;
+	float: left;
+	margin: 5px;
+}
+
+.boxart_holder img {
+	padding: 0px;
+	margin: 0px;
+	width: 100%
+}
+
+.boxart_holder a {
+	display: block;
+	margin: 0px;
+	text-align: center;
+	color: #025A8D;
+	font-size: 13px;
+}
+
+div#boxarts {
+	float: left;
+	overflow: hidden;
+	width: 435px;
+	border-top: 0;
+	height: 100%;
+}
+
+#previous,#next {
+	cursor: pointer;
+	float: left;
+	margin-top: 56px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+div#boxarts div.inner {
+	width: 3780px;
+}
+
+div#esrbrating a img {
+	float:left;
+}

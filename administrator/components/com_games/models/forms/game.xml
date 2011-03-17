@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field
+			name="id"
+			type="text"
+			class="readonly"
+			label="JGLOBAL_FIELD_ID_LABEL"
+			description ="JGLOBAL_FIELD_ID_DESC"
+			size="10"
+			default="0"
+			required="true"
+			readonly="true"  />
+
+		<field
+			name="title"
+			type="text"
+			label="JGLOBAL_TITLE"
+			description="JFIELD_TITLE_DESC"
+			class="inputbox"
+			size="30"
+			required="true" />
+
+		<field
+			name="alias"
+			type="text"
+			label="JFIELD_ALIAS_LABEL"
+			description="JFIELD_ALIAS_DESC"
+			class="inputbox"
+			size="45" />
+
+		<field
+			name="site"
+			type="text"
+			label="COM_GAMES_FIELD_SITE_LABEL"
+			description="COM_GAMES_FIELD_SITE_DESC"
+			class="inputbox"
+			size="45" />
+
+		<field
+			name="genres"
+			type="category"
+			extension="com_games.genres"
+			label="COM_GAMES_FIELD_GENRES_LABEL"
+			description="COM_GAMES_FIELD_GENRES_DESC"
+			default="0"
+			class="inputbox"
+			multiple="true"
+			required="true" >
+			<option
+				value="0">COM_GAMES_OPTION_NO_GENRE</option>
+		</field>
+
+		<field
+			name="platforms"
+			type="category"
+			extension="com_games.platforms"
+			label="COM_GAMES_FIELD_PLATFORMS_LABEL"
+			description="COM_GAMES_FIELD_PLATFORMS_DESC"
+			default="0"
+			class="inputbox"
+			multiple="true"
+			required="true" >
+			<option
+				value="0">COM_GAMES_OPTION_NO_PLATFORM</option>
+		</field>
+
+		<field name="boxarts"/>
+
+		<field
+			name="serie"
+			type="text"
+			label="COM_GAMES_FIELD_SERIE_LABEL"
+			description="COM_GAMES_FIELD_SERIE_DESC"
+			class="inputbox"
+			size="45" />
+
+		<field
+			name="publisher"
+			type="text"
+			label="COM_GAMES_FIELD_PUBLISHER_LABEL"
+			description="COM_GAMES_FIELD_PUBLISHER_DESC"
+			class="inputbox"
+			size="45" />
+
+		<field
+			name="developer"
+			type="text"
+			label="COM_GAMES_FIELD_DEVELOPER_LABEL"
+			description="COM_GAMES_FIELD_DEVELOPER_DESC"
+			class="inputbox"
+			size="45" />
+
+		<field
+			name="description"
+			type="editor"
+			class="inputbox"
+			label="COM_GAMES_FIELD_DESCRIPTION_LABEL"
+			description="COM_GAMES_FIELD_DESCRIPTION_DESC"
+			filter="safehtml"
+			buttons="true" />
+
+		<field
+			name="esrb_rating"
+			type="esrbrating"
+			label="COM_GAMES_FIELD_ESRB_RATING_LABEL"
+			description="COM_GAMES_FIELD_ESRB_RATING_DESC"
+			default="0" />
+
+		<field
+			name="esrb_content"
+			type="esrbcontent"
+			label="COM_GAMES_FIELD_ESRB_CONTENT_LABEL"
+			description="COM_GAMES_FIELD_ESRB_CONTENT_DESC"
+			size="10"
+			multiple="true" />
+
+		<field
+			name="pegi_rating"
+			type="pegirating"
+			label="COM_GAMES_FIELD_PEGI_RATING_LABEL"
+			description="COM_GAMES_FIELD_PEGI_RATING_DESC" />
+
+		<field
+			name="pegi_content"
+			type="pegicontent"
+			label="COM_GAMES_FIELD_PEGI_CONTENT_LABEL"
+			description="COM_GAMES_FIELD_PEGI_CONTENT_DESC" />
+
+	</fieldset>
+</form>

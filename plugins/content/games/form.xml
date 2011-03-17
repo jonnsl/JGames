@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<form>
+	<fields name="attribs">
+		<fieldset name="games" label="PLG_CONTENT_GAMES_FIELDSET_LABEL" addfieldpath="/administrator/components/com_games/models/fields">
+			<field
+				name="game"
+				type="game"
+				label="PLG_CONTENT_GAMES_FIELD_GAME_LABEL"
+				description="PLG_CONTENT_GAMES_FIELD_GAME_DESC"
+				default=""
+				class="inputbox" />
+		</fieldset>
+	</fields>
+</form>

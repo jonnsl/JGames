@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+<fields name="params">
+		<fieldset
+			name="boxart"
+			addrulepath="/administrator/components/com_games/models/rules">
+
+				<field
+					name="width"
+					type="text"
+					label="COM_GAMES_CATEGORY_FIELD_WIDTH_LABEL"
+					description="COM_GAMES_CATEGORY_FIELD_WIDTH_DESC"
+					required="true"
+					validate="positive"
+					default="120" />
+
+				<field
+					name="height"
+					type="text"
+					label="COM_GAMES_CATEGORY_FIELD_HEIGHT_LABEL"
+					description="COM_GAMES_CATEGORY_FIELD_HEIGHT_DESC"
+					required="true"
+					validate="positive"
+					default="165" />
+
+				<field
+					name="default_boxart"
+					type="media"
+					label="COM_GAMES_CATEGORY_FIELD_DEFAULT_BOXART_LABEL"
+					description="COM_GAMES_CATEGORY_FIELD_DEFAULT_BOXART_DESC"
+					default="images/games/boxarts/noboxshot.gif"
+					required="true" />
+		</fieldset>
+	</fields>
+</form>

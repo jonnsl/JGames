@@ -1,0 +1,72 @@
+<?php
+/**
+ * @version		$Id$
+ * @package		com_games
+ * @subpackage	Administrator
+ * @license		GNU General Public License version 3
+ */
+
+// No direct access
+defined('_JEXEC') or die;
+
+/**
+ *
+ */
+class GamesViewGames extends JView
+{
+	protected $items;
+	protected $pagination;
+	protected $state;
+
+	/**
+	 * Display the view
+	 */
+	public function display($tpl = null)
+	{
+		$this->state		= $this->get('State');
+		$this->items		= $this->get('Items');
+		$this->pagination	= $this->get('Pagination');
+		$this->series		= $this->get('Series');
+		$this->developers	= $this->get('Developers');
+		$this->publishers	= $this->get('Publishers');
+
+
+		// Check for errors.
+		if (count($errors = $this->get('Errors'))) {
+			JError::raiseError(500, implode("\n", $errors));
+			return false;
+		}
+
+		$this->addToolbar();
+		GamesHelper::addSubmenu($this->getName());
+		parent::display($tpl);
+	}
+
+	protected function addToolbar()
+	{
+		JToolBarHelper::title(JText::_('COM_GAMES_GAMES'), 'games');
+
+		JToolBarHelper::addNew('game.add', 'JTOOLBAR_NEW');
+		JToolBarHelper::editList('game.edit', 'JTOOLBAR_EDIT');
+
+		JToolBarHelper::divider();
+		JToolBarHelper::publishList('games.publish', 'JTOOLBAR_PUBLISH');
+		JToolBarHelper::unpublishList('games.unpublish', 'JTOOLBAR_UNPUBLISH');
+
+		JToolBarHelper::divider();
+		JToolBarHelper::archiveList('games.archive','JTOOLBAR_ARCHIVE');
+		//JToolBarHelper::custom('games.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
+		if($this->state->get('filter.state') == -2){
+			JToolBarHelper::deleteList('', 'games.delete','JTOOLBAR_EMPTY_TRASH');
+		}
+		else {
+			JToolBarHelper::trash('games.trash','JTOOLBAR_TRASH');
+		}
+
+		JToolBarHelper::divider();
+		JToolBarHelper::preferences('com_games');
+
+		JToolBarHelper::divider();
+		JToolBarHelper::help('JHELP_CONTENT_ARTICLE_MANAGER');
+	}
+}

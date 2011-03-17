@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_GAMES_GAME_VIEW_DEFAULT_TITLE">
+		<message>
+			<![CDATA[COM_GAMES_GAME_VIEW_DEFAULT_DESC]]>
+		</message>
+	</layout>
+
+	<!-- Add fields to the request variables for the layout. -->
+	<fields name="request">
+		<fieldset name="request" label="COM_GAMES_BASIC_OPTIONS_LABEL"
+		addfieldpath="/administrator/components/com_games/models/fields">
+
+			<field
+				name="genres"
+				type="category"
+				extension="com_games.genres"
+				label="COM_GAMES_FIELD_GENRES_LABEL"
+				description="COM_GAMES_FIELD_GENRES_DESC"
+				default=""
+				class="inputbox"
+				multiple="true" >
+				<option
+					value="">COM_GAMES_OPTION_ANY_GENRE</option>
+			</field>
+
+			<field
+				name="platforms"
+				type="category"
+				extension="com_games.platforms"
+				label="COM_GAMES_FIELD_PLATFORMS_LABEL"
+				description="COM_GAMES_FIELD_PLATFORMS_DESC"
+				default=""
+				class="inputbox"
+				multiple="true" >
+				<option
+					value="">COM_GAMES_OPTION_ANY_PLATFORM</option>
+			</field>
+
+			<field
+				name="series"
+				type="series"
+				label="COM_GAMES_FIELD_SERIE_LABEL"
+				description="COM_GAMES_FIELD_SERIE_DESC"
+				class="inputbox"
+				multiple="true" >
+				<option
+					value="">COM_GAMES_OPTION_ANY_SERIE</option>
+			</field>
+
+			<field
+				name="publishers"
+				type="publishers"
+				label="COM_GAMES_FIELD_PUBLISHER_LABEL"
+				description="COM_GAMES_FIELD_PUBLISHER_DESC"
+				class="inputbox"
+				multiple="true" >
+				<option
+					value="">COM_GAMES_OPTION_ANY_PUBLISHER</option>
+			</field>
+
+			<field
+				name="developers"
+				type="developers"
+				label="COM_GAMES_FIELD_DEVELOPER_LABEL"
+				description="COM_GAMES_FIELD_DEVELOPER_DESC"
+				class="inputbox"
+				multiple="true" >
+				<option
+					value="">COM_GAMES_OPTION_ANY_DEVELOPER</option>
+			</field>
+		</fieldset>
+	</fields>
+</metadata>
