@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="1.6" type="plugin" group="content">
-	<name>plg_content_games</name>
-	<author>Jonnathan</author>
-	<creationDate>July 2010</creationDate>
-	<license>GNU General Public License version 2 or later</license>
+	<author>Jonnathan Soares Lima</author>
 	<authorEmail>jonnsl@hotmail.com</authorEmail>
+	<copyright>(C) 2011 Copyleft - all rights reversed</copyright>
+	<license>GNU General Public License version 3</license>
+	<creationDate>July 2010</creationDate>
 	<version>1.0</version>
 	<description>PLG_CONTENT_GAMES_XML_DESCRIPTION</description>
 
