@@ -31,7 +31,7 @@ class plgContentGames extends JPlugin
 
 		// Load the custom form
 		$this->loadLanguage();
-		$form->loadFile(dirname(__FILE__).'/form.xml');
+		$form->loadFile(dirname(__FILE__).'/forms/form.xml');
 
 		// Load the custom data
 		if(isset($data->id) && $data->id){
