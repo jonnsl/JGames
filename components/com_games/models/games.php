@@ -9,10 +9,12 @@
 // No direct access
 defined('_JEXEC') or die;
 
+JGImport('application.component.modelList');
+
 /**
  *
  */
-class GamesModelGames extends GamesModelList
+class GamesModelGames extends JGModelList
 {
 	/**
 	 * Method to auto-populate the model state.

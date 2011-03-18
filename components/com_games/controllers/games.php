@@ -9,10 +9,12 @@
 // No direct access
 defined('_JEXEC') or die;
 
+JGImport('application.component.controllerList');
+
 /**
  *
  */
-class GamesControllerGames extends GamesControllerList
+class GamesControllerGames extends JGControllerList
 {
 
 }

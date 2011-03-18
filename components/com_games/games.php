@@ -10,8 +10,8 @@
 defined('_JEXEC') or die;
 
 // Include dependencies
-require_once(JPATH_COMPONENT_ADMINISTRATOR.'/loader.php');
+JGImport('application.component.controller');
 
-$controller = GamesController::getInstance('Games');
+$controller = JGController::getInstance('Games');
 $controller->execute(JRequest::getCmd('task'));
 $controller->redirect();

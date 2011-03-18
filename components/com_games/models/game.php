@@ -10,11 +10,12 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.form.form');
+JGImport('application.component.model');
 
 /**
  *
  */
-class GamesModelGame extends GamesModel
+class GamesModelGame extends JGModel
 {
 	protected function populateState()
 	{

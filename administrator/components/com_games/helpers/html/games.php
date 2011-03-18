@@ -9,7 +9,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
-JLoader::register('GamesXhtml', dirname(__FILE__).'/../../libraries/html/xhtml.php');
+JLoader::register('GamesXhtml', JPATH_LIBRARIES.'/games/html/xhtml.php');
 
 /**
  * Utility class for games
