@@ -9,7 +9,6 @@
 // No direct access
 defined('_JEXEC') or die;
 
-require JPATH_ADMINISTRATOR.'/components/com_games/loader.php';
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 JGImport('application.component.model');

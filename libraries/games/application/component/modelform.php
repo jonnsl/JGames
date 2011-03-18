@@ -32,9 +32,6 @@ abstract class JGModelForm extends JGModel
 	 */
 	public function checkin($pk = null)
 	{
-		// Initialise variables.
-		$pk	= (!empty($pk)) ? $pk : (int) $this->getState($this->getName().'.id');
-
 		// Only attempt to check the row in if it exists.
 		if ($pk) {
 			$user = JFactory::getUser();
@@ -70,9 +67,6 @@ abstract class JGModelForm extends JGModel
 	 */
 	public function checkout($pk = null)
 	{
-		// Initialise variables.
-		$pk = (!empty($pk)) ? $pk : (int) $this->getState($this->getName().'.id');
-
 		// Only attempt to check the row in if it exists.
 		if ($pk) {
 			$user = JFactory::getUser();
@@ -106,9 +100,8 @@ abstract class JGModelForm extends JGModel
 	 * @param	array	$data		Data for the form.
 	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
 	 * @return	mixed	A JForm object on success, false on failure
-	 * @since	1.6
 	 */
-	abstract public function getForm($loadData = true);
+	abstract public function getForm($data = array(), $loadData = true);
 
 	/**
 	 * Method to get a form object.
@@ -218,10 +211,9 @@ abstract class JGModelForm extends JGModel
 	 * @param	array		$data		The data to validate.
 	 * @return	mixed		Array of filtered data if valid, false otherwise.
 	 */
-	function validate($data)
+	public function validate($form, $data)
 	{
 		// Filter and validate the form data.
-		$form	= $this->getForm();
 		$data	= $form->filter($data);
 		$return	= $form->validate($data);
 
@@ -288,13 +280,10 @@ abstract class JGModelForm extends JGModel
 		$app		= JFactory::getApplication();
 		$context	= $this->option.'.edit.'.$this->getName();
 
-		// Get the Primary key
-		if (!($pk = (int) $app->getUserState($context.'.id'))) {
-			$pk = (int) JRequest::getInt('id');
-		}
-		$this->setState($this->getName().'.id', $pk);
-
 		// Get the data
+		$id = $app->getUserState($context.'.id', array());
+		$this->setState($this->getName().'.id', $id);
+		
 		$data = $app->getUserState($context.'.data', array());
 		$this->setState($this->getName().'.data', $data);
 

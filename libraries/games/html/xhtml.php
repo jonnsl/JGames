@@ -9,7 +9,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
-class GamesXhtml extends JObject
+class JGXhtml extends JObject
 {
 	/**
 	 *

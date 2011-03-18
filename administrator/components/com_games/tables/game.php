@@ -14,7 +14,7 @@ JGImport('database.table');
 /**
  * Table class
  */
-class JTableGame extends JGTable
+class JGTableGame extends JGTable
 {
 	public $genres;
 	public $platforms;

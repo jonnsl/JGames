@@ -35,7 +35,7 @@ class JGControllerList extends JGController
 	 *
 	 * @var	string
 	 */
-	protected $msgPrefix;
+	protected $text_prefix;
 
 	/**
 	 * Constructor.
@@ -58,8 +58,8 @@ class JGControllerList extends JGController
 		}
 
 		// Set the Message prefix
-		if (empty($this->msgPrefix)) {
-			$this->msgPrefix = strtoupper($this->option.'_'.$this->getName().'_');
+		if (empty($this->text_prefix)) {
+			$this->text_prefix = strtoupper($this->option.'_'.$this->getName().'_');
 		}
 
 		// Setup redirect info.
@@ -114,12 +114,12 @@ class JGControllerList extends JGController
 			{
 				// Prune items that you can't delete.
 				unset($ids[$i]);
-				JError::raiseNotice(403, JText::sprintf($this->msgPrefix.'ERROR_DELETE_N_NOT_PERMITTED', $id));
+				JError::raiseNotice(403, JText::sprintf($this->text_prefix.'ERROR_DELETE_N_NOT_PERMITTED', $id));
 			}
 		}
 
 		if (empty($ids)) {
-			JError::raiseWarning(500, JText::_($this->msgPrefix.'ERROR_NO_ITEMS_SELECTED'));
+			JError::raiseWarning(500, JText::_($this->text_prefix.'ERROR_NO_ITEMS_SELECTED'));
 		}
 		else
 		{
@@ -139,7 +139,7 @@ class JGControllerList extends JGController
 				}
 			}
 			if (count($success)) {
-				$this->setMessage(JText::plural($this->msgPrefix.'SUCCESS_N_ITEMS_DELETED', count($success)));
+				$this->setMessage(JText::plural($this->text_prefix.'SUCCESS_N_ITEMS_DELETED', count($success)));
 			}
 		}
 
@@ -180,12 +180,12 @@ class JGControllerList extends JGController
 			{
 				// Prune items that you can't delete.
 				unset($ids[$i]);
-				JError::raiseNotice(403, JText::sprintf($this->msgPrefix.'ERROR_EDIT_STATE_N_NOT_PERMITTED', $id));
+				JError::raiseNotice(403, JText::sprintf($this->text_prefix.'ERROR_EDIT_STATE_N_NOT_PERMITTED', $id));
 			}
 		}
 
 		if (empty($ids)) {
-			JError::raiseWarning(500, JText::_($this->msgPrefix.'ERROR_NO_ITEMS_SELECTED'));
+			JError::raiseWarning(500, JText::_($this->text_prefix.'ERROR_NO_ITEMS_SELECTED'));
 		}
 		else
 		{
@@ -198,7 +198,7 @@ class JGControllerList extends JGController
 			}
 			else
 			{
-				$text = $this->msgPrefix.'SUCCESS_N_ITEMS_';
+				$text = $this->text_prefix.'SUCCESS_N_ITEMS_';
 				switch($task)
 				{
 					case 0:
@@ -256,19 +256,19 @@ class JGControllerList extends JGController
 				$model	= $this->getModel();
 
 				if($model->reorder($id, $dir)) {
-					$this->setMessage(JText::_($this->msgPrefix.'SUCCESS_ITEM_REOEDERED'));
+					$this->setMessage(JText::_($this->text_prefix.'SUCCESS_ITEM_REOEDERED'));
 				}
 				else {
-					JError::raiseWarning(500, JText::sprintf($this->msgPrefix.'ERROR_REORDER_FAILED', $model->getError()));
+					JError::raiseWarning(500, JText::sprintf($this->text_prefix.'ERROR_REORDER_FAILED', $model->getError()));
 				}
 			}
 			else {
-				JError::raiseNotice(403, JText::sprintf($this->msgPrefix.'ERROR_EDIT_N_NOT_PERMITTED', $id));
+				JError::raiseNotice(403, JText::sprintf($this->text_prefix.'ERROR_EDIT_N_NOT_PERMITTED', $id));
 			}
 
 		}
 		else {
-			JError::raiseWarning(500, JText::_($this->msgPrefix.'ERROR_NO_ITEMS_SELECTED'));
+			JError::raiseWarning(500, JText::_($this->text_prefix.'ERROR_NO_ITEMS_SELECTED'));
 		}
 
 		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list.$this->_append, false));
@@ -297,12 +297,12 @@ class JGControllerList extends JGController
 			{
 				// Prune items that you can't delete.
 				unset($ids[$i]);
-				JError::raiseNotice(403, JText::sprintf($this->msgPrefix.'ERROR_EDIT_N_NOT_PERMITTED', $id));
+				JError::raiseNotice(403, JText::sprintf($this->text_prefix.'ERROR_EDIT_N_NOT_PERMITTED', $id));
 			}
 		}
 
 		if (empty($ids)) {
-			JError::raiseWarning(500, JText::_($this->msgPrefix.'ERROR_NO_ITEMS_SELECTED'));
+			JError::raiseWarning(500, JText::_($this->text_prefix.'ERROR_NO_ITEMS_SELECTED'));
 		}
 		else
 		{
@@ -311,10 +311,10 @@ class JGControllerList extends JGController
 
 			// Save the ordering
 			if($model->saveorder($ids, $order)) {
-				$this->setMessage(JText::_($this->msgPrefix.'SUCCESS_ORDERING_SAVED'));
+				$this->setMessage(JText::_($this->text_prefix.'SUCCESS_ORDERING_SAVED'));
 			}
 			else{
-				JError::raiseWarning(500, JText::sprintf($this->msgPrefix.'ERROR_SAVEORDER_FAILED', $model->getError()));
+				JError::raiseWarning(500, JText::sprintf($this->text_prefix.'ERROR_SAVEORDER_FAILED', $model->getError()));
 			}
 		}
 

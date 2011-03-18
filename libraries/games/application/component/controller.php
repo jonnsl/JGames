@@ -1,16 +1,17 @@
 <?php
 /**
  * @version		$Id$
- * @package		com_games
+ * @package		JGames
  * @subpackage	Libraries
+ * @copyright	(C) 2011 Copyleft - all rights reversed
  * @license		GNU General Public License version 3
  */
 
-// No direct access
+// No direct access.
 defined('_JEXEC') or die;
 
 /**
- * Base controller class for the games component
+ * Base controller class for the JGames
  *
  * @since 1.0
  */
@@ -19,56 +20,56 @@ class JGController extends JObject
 	/**
 	 * The base path of the controller
 	 *
-	 * @var		string
+	 * @var string
 	 */
 	protected $basePath;
 
 	/**
 	 * The default view for the display method.
 	 *
-	 * @var		string
+	 * @var string	
 	 */
 	protected $default_view;
 
 	/**
 	 * The mapped task that was performed.
 	 *
-	 * @var		string
+	 * @var string
 	 */
 	protected $doTask;
 
 	/**
 	 * Redirect message.
 	 *
-	 * @var		string
+	 * @var string
 	 */
 	protected $message;
 
 	/**
 	 * Redirect message type.
 	 *
-	 * @var		string
+	 * @var string
 	 */
 	protected $messageType = 'message';
 
 	/**
 	 * Array of class methods
 	 *
-	 * @var		array
+	 * @var array
 	 */
-	protected $methods = array();
+	protected $methods;
 
 	/**
 	 * The name of the controller
 	 *
-	 * @var	string
+	 * @var string
 	 */
 	protected $name;
 
 	/**
 	 * The set of search directories for resources (views).
 	 *
-	 * @var		array
+	 * @var array
 	 */
 	protected $paths = array();
 
@@ -82,34 +83,35 @@ class JGController extends JObject
 	/**
 	 * URL for redirection.
 	 *
-	 * @var		string
+	 * @var string
 	 */
 	protected $redirect;
 
 	/**
 	 * Current or most recent task to be performed.
 	 *
-	 * @var		string
+	 * @var string
 	 */
 	protected $task;
 
 	/**
 	 * Array of class methods to call for a given task.
 	 *
-	 * @var		array
+	 * @var array
 	 */
-	protected $taskMap = array();
+	protected $taskMap;
 
 	/**
 	 * Adds to the stack of model paths in LIFO order.
 	 *
 	 * @param	string|array The directory (string), or list of directories (array) to add.
+	 * @param	string	A prefix for models
 	 * @return	void
 	 */
-	public static function addModelPath($path)
+	public static function addModelPath($path, $prefix = '')
 	{
-		jimport('joomla.application.component.model');
-		JModel::addIncludePath($path);
+		JGImport('application.component.model');
+		JGModel::addIncludePath($path, $prefix);
 	}
 
 	/**
@@ -123,7 +125,8 @@ class JGController extends JObject
 	{
 		$filename = '';
 
-		switch ($type) {
+		switch ($type)
+		{
 			case 'controller':
 				$parts['format'] = (empty($parts['format']) || $parts['format'] == 'html') ? '' : '.'.$parts['format'];
 				$filename = strtolower($parts['name']).$parts['format'].'.php';
@@ -135,8 +138,9 @@ class JGController extends JObject
 				}
 
 				$filename = strtolower($parts['name']).'/view'.$parts['type'].'.php';
-			break;
+				break;
 		}
+
 		return $filename;
 	}
 
@@ -144,51 +148,23 @@ class JGController extends JObject
 	 * Method to get a singleton controller instance.
 	 *
 	 * @param	string	The prefix for the controller.
-	 * @param	string	Default view if none is set
+	 * @param	string	Default controller if none is set
 	 * @param	array	An array of optional constructor options.
-	 * @return	Object	JController derivative class
+	 * @return	mixed	JController derivative class or JException on error.
 	 */
-	public static function getInstance($prefix, $default = NULL, $config = array())
+	public static function getInstance($prefix, $controller = null, $config = array())
 	{
-		static $instance;
-
-		if (!empty($instance)) {
-			return $instance;
-		}
-
 		// Get the environment configuration.
 		$basePath	= isset($config['base_path']) ? $config['base_path'] : JPATH_COMPONENT;
 		$format		= JRequest::getWord('format');
-		$default	= ($default) ? $default : $prefix;
-		$command	= JRequest::getCmd('task', JRequest::getCmd('view').'.display');
-
-		// Check for array format.
-		if (is_array($command)) {
-			$command = JFilterInput::clean(array_pop(array_keys($command)), 'cmd');
-		} else {
-			$command = JFilterInput::clean($command, 'cmd');
-		}
-
-		// Check for a controller.task command.
-		if (strpos($command, '.') !== false) {
-			// Explode the controller.task command.
-			list($type, $task) = explode('.', $command);
-
-			// Reset the task without the contoller context.
-			JRequest::setVar('task', $task);
-		}
-		else {
-			// Default controller.
-			$type	= $default;
-			$task	= $command;
-		}
+		$controller	= JRequest::getCmd('controller', $controller ? $controller : $prefix);
 
 		// Define the controller filename and path.
-		$file	= self::createFileName('controller', array('name' => $type, 'format' => $format));
+		$file	= self::createFileName('controller', array('name' => $controller, 'format' => $format));
 		$path	= $basePath.'/controllers/'.$file;
 
 		// Get the controller class name.
-		$class = ucfirst($prefix).'Controller'.ucfirst($type);
+		$class = ucfirst($prefix).'Controller'.ucfirst(strtolower($controller));
 
 		// Include the class if not present.
 		if (!class_exists($class)) {
@@ -196,18 +172,16 @@ class JGController extends JObject
 			if (file_exists($path)) {
 				require_once $path;
 			} else {
-				JError::raiseError(1056, JText::sprintf('JLIB_APPLICATION_ERROR_INVALID_CONTROLLER', $type, $format), $type);
+				JError::raiseError(1056, JText::sprintf('JLIB_APPLICATION_ERROR_INVALID_CONTROLLER', $controller, $format));
 			}
 		}
 
 		// Instantiate the class.
 		if (class_exists($class)) {
-			$instance = new $class($config);
-		} else {
-			JError::raiseError(1057, JText::sprintf('JLIB_APPLICATION_ERROR_INVALID_CONTROLLER_CLASS', $class), $class);
+			return new $class($config);
 		}
 
-		return $instance;
+		JError::raiseError(1057, JText::sprintf('JLIB_APPLICATION_ERROR_INVALID_CONTROLLER_CLASS', $class));
 	}
 
 	/**
@@ -226,8 +200,9 @@ class JGController extends JObject
 		$r			= new ReflectionClass($this);
 		$rName		= $r->getName();
 		$rMethods	= $r->getMethods(ReflectionMethod::IS_PUBLIC);
-		$methods	= array();
-		foreach ($rMethods as $rMethod) {
+
+		foreach ($rMethods as $rMethod)
+		{
 			$mName = $rMethod->getName();
 
 			// Add default display method if not explicitly declared.
@@ -238,7 +213,7 @@ class JGController extends JObject
 			}
 		}
 
-		// Set the view name
+		//set the view name
 		if (empty($this->name) && isset($config['name'])) {
 			$this->name = $config['name'];
 		}
@@ -275,7 +250,6 @@ class JGController extends JObject
 		if (empty($this->default_view)) {
 			$this->default_view	= (isset($config['default_view'])) ? $config['default_view'] : $this->getName();
 		}
-
 	}
 
 	/**
@@ -284,6 +258,7 @@ class JGController extends JObject
 	 * @param	string			The path type (e.g. 'model', 'view'.
 	 * @param	string|array	The directory or stream to search.
 	 * @return	JController		This object to support chaining.
+	 * @since	1.6				Replaces _addPath.
 	 */
 	protected function addPath($type, $path)
 	{
@@ -295,7 +270,8 @@ class JGController extends JObject
 		}
 
 		// loop through the path directories
-		foreach ($path as $dir) {
+		foreach ($path as $dir)
+		{
 			// no surrounding spaces allowed!
 			$dir = rtrim(JPath::check($dir, '/'), '/').'/';
 
@@ -315,6 +291,7 @@ class JGController extends JObject
 	public function addViewPath($path)
 	{
 		$this->addPath('view', $path);
+
 		return $this;
 	}
 
@@ -328,11 +305,15 @@ class JGController extends JObject
 	 */
 	protected function createModel($name, $prefix = '', $config = array())
 	{
+		JGImport('application.component.model');
+
 		// Clean the model name
 		$modelName		= preg_replace('/[^A-Z0-9_]/i', '', $name);
 		$classPrefix	= preg_replace('/[^A-Z0-9_]/i', '', $prefix);
 
-		return JModel::getInstance($modelName, $classPrefix, $config);
+		$result = JGModel::getInstance($modelName, $classPrefix, $config);
+
+		return $result;
 	}
 
 	/**
@@ -365,6 +346,7 @@ class JGController extends JObject
 				$this->paths['view'],
 				$this->createFileName('view', array('name' => $viewName, 'type' => $viewType))
 			);
+
 			if ($path) {
 				require_once $path;
 
@@ -373,7 +355,8 @@ class JGController extends JObject
 						500, JText::sprintf('JLIB_APPLICATION_ERROR_VIEW_CLASS_NOT_FOUND', $viewClass, $path));
 					return null;
 				}
-			} else {
+			}
+			else {
 				return null;
 			}
 		}
@@ -396,7 +379,7 @@ class JGController extends JObject
 		$document	= JFactory::getDocument();
 		$viewType	= $document->getType();
 		$viewName	= JRequest::getCmd('view', $this->default_view);
-		$viewLayout	= JRequest::getCmd('layout', 'default');
+		$viewLayout = JRequest::getCmd('layout', 'default');
 
 		$view = $this->getView($viewName, $viewType, '', array('base_path' => $this->basePath));
 
@@ -409,16 +392,16 @@ class JGController extends JObject
 		// Set the layout
 		$view->setLayout($viewLayout);
 
-		$view->assignRef('document', $document);
-
-		$conf = JFactory::getConfig();
+		$view->document = $document;
 
 		// Display the view
-		if ($cachable && $viewType != 'feed' && $conf->get('caching')) {
+		if ($cachable && $viewType != 'feed' && JFactory::getConfig()->get('caching') >= 1)
+		{
 			$option	= JRequest::getCmd('option');
 			$cache	= JFactory::getCache($option, 'view');
 
-			if (is_array($urlparams)) {
+			if (is_array($urlparams))
+			{
 				$app = JFactory::getApplication();
 
 				$registeredurlparams = $app->get('registeredurlparams');
@@ -427,16 +410,19 @@ class JGController extends JObject
 					$registeredurlparams = new stdClass();
 				}
 
-				foreach ($urlparams AS $key => $value) {
+				foreach ($urlparams as $key => $value)
+				{
 					// add your safe url parameters with variable type as value {@see JFilterInput::clean()}.
 					$registeredurlparams->$key = $value;
-					$app->set('registeredurlparams', $registeredurlparams);
 				}
+
+				$app->set('registeredurlparams', $registeredurlparams);
 			}
 
 			$cache->get($view, 'display');
 
-		} else {
+		}
+		else {
 			$view->display();
 		}
 
@@ -449,8 +435,9 @@ class JGController extends JObject
 	 * @param	string The task to perform. If no matching task is found, the '__default' task is executed, if defined.
 	 * @return	mixed|false The value returned by the called method, false in error case.
 	 */
-	public function execute($task)
+	public function execute($task = null)
 	{
+		$task = $task ? $task : JRequest::getCmd('task');
 		$this->task = $task;
 
 		$task = strtolower($task);
@@ -476,7 +463,6 @@ class JGController extends JObject
 	 * @param	string	The class prefix. Optional.
 	 * @param	array	Configuration array for model. Optional.
 	 * @return	object	The model.
-	 * @since	1.5
 	 */
 	public function getModel($name = '', $prefix = '', $config = array())
 	{
@@ -488,7 +474,8 @@ class JGController extends JObject
 			$prefix = $this->getPrefix() . 'Model';
 		}
 
-		if ($model = $this->createModel($name, $prefix, $config)) {
+		if ($model = $this->createModel($name, $prefix, $config))
+		{
 			// task is a reserved state
 			$model->setState('task', $this->task);
 
@@ -498,7 +485,7 @@ class JGController extends JObject
 
 			if (is_object($menu)) {
 				if ($item = $menu->getActive()) {
-					$params	= &$menu->getParams($item->id);
+					$params	= $menu->getParams($item->id);
 					// Set Default State Data
 					$model->setState('parameters.menu', $params);
 				}
@@ -510,15 +497,15 @@ class JGController extends JObject
 	/**
 	 * Method to get the controller name
 	 *
-	 * The controller name by default parsed using the classname, or it can be set
+	 * The dispatcher name by default parsed using the classname, or it can be set
 	 * by passing a $config['name'] in the class constructor
 	 *
-	 * @return	string
+	 * @return	string The name of the controller
 	 */
 	public function getName()
 	{
-		if (empty($this->name)) {
-			$r = null;
+		if (empty($this->name))
+		{
 			if (!preg_match('/Controller([a-z]*)$/i', get_class($this), $r)) {
 				JError::raiseError(500, JText::_('JLIB_APPLICATION_ERROR_CONTROLLER_GET_NAME'));
 			}
@@ -527,7 +514,7 @@ class JGController extends JObject
 
 		return $this->name;
 	}
-
+	
 	/**
 	 * Method to get the controller prefix
 	 *
@@ -538,8 +525,8 @@ class JGController extends JObject
 	 */
 	public function getPrefix()
 	{
-		if (empty($this->prefix)) {
-			$r = null;
+		if (empty($this->prefix))
+		{
 			if (!preg_match('/^([a-z]*)Controller/i', get_class($this), $r)) {
 				JError::raiseError(500, JText::_('JLIB_APPLICATION_ERROR_CONTROLLER_GET_NAME'));
 			}
@@ -552,7 +539,7 @@ class JGController extends JObject
 	/**
 	 * Get the last task that is or was to be performed.
 	 *
-	 * @return	string
+	 * @return	string The task that was or is being performed.
 	 */
 	public function getTask()
 	{
@@ -562,7 +549,7 @@ class JGController extends JObject
 	/**
 	 * Gets the available tasks in the controller.
 	 *
-	 * @return	array
+	 * @return	array Array[i] of task names.
 	 */
 	public function getTasks()
 	{
@@ -576,7 +563,7 @@ class JGController extends JObject
 	 * @param	string	The view type. Optional.
 	 * @param	string	The class prefix. Optional.
 	 * @param	array	Configuration array for view. Optional.
-	 * @return	object
+	 * @return	object	Reference to the view or an error.
 	 */
 	public function getView($name = '', $type = '', $prefix = '', $config = array())
 	{
@@ -611,12 +598,15 @@ class JGController extends JObject
 	 * Redirects the browser or returns false if no redirect is set.
 	 *
 	 * @return	boolean	False if no redirect exists.
+	 * @since	1.5
 	 */
 	public function redirect()
 	{
 		if ($this->redirect) {
-			JFactory::getApplication()->redirect($this->redirect, $this->message, $this->messageType);
+			JFactory::getApplication()
+				->redirect($this->redirect, $this->message, $this->messageType);
 		}
+
 		return false;
 	}
 
@@ -629,6 +619,7 @@ class JGController extends JObject
 	public function registerDefaultTask($method)
 	{
 		$this->registerTask('__default', $method);
+
 		return $this;
 	}
 
@@ -644,6 +635,19 @@ class JGController extends JObject
 		if (in_array(strtolower($method), $this->methods)) {
 			$this->taskMap[strtolower($task)] = $method;
 		}
+
+		return $this;
+	}
+	/**
+	 * Unregister (unmap) a task in the class.
+	 *
+	 * @param	string		The task.
+	 * @return	JController	This object to support chaining.
+	 */
+	public function unregisterTask($task)
+	{
+		unset($this->taskMap[strtolower($task)]);
+
 		return $this;
 	}
 
@@ -653,7 +657,6 @@ class JGController extends JObject
 	 * @param	string	Message to display on redirect.
 	 * @param	string	Message type (since 1.6). Optional, defaults to 'message'.
 	 * @return	string	Previous message
-	 * @since	1.5
 	 */
 	public function setMessage($text, $type = 'message')
 	{
@@ -682,10 +685,10 @@ class JGController extends JObject
 	/**
 	 * Set a URL for browser redirection.
 	 *
-	 * @param	string 		URL to redirect to.
-	 * @param	string		Message to display on redirect. Optional, defaults to value set internally by controller, if any.
-	 * @param	string		Message type. Optional, defaults to 'message'.
-	 * @return	JController	This object to support chaining.
+	 * @param   string  $url   URL to redirect to.
+	 * @param   string  $msg   Message to display on redirect. Optional, defaults to value set internally by controller, if any.
+	 * @param   string  $type  Message type. Optional, defaults to 'message' or the type set by a previous call to setMessage.
+	 * @return  JController  This object to support chaining.
 	 */
 	public function setRedirect($url, $msg = null, $type = null)
 	{

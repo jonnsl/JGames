@@ -53,17 +53,16 @@ class GamesViewGames extends JView
 		JToolBarHelper::editList('game.edit', 'JTOOLBAR_EDIT');
 
 		JToolBarHelper::divider();
-		JToolBarHelper::publishList('games.publish', 'JTOOLBAR_PUBLISH');
-		JToolBarHelper::unpublishList('games.unpublish', 'JTOOLBAR_UNPUBLISH');
+		JToolBarHelper::publishList('publish', 'JTOOLBAR_PUBLISH');
+		JToolBarHelper::unpublishList('unpublish', 'JTOOLBAR_UNPUBLISH');
 
 		JToolBarHelper::divider();
-		JToolBarHelper::archiveList('games.archive','JTOOLBAR_ARCHIVE');
-		//JToolBarHelper::custom('games.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
+		JToolBarHelper::archiveList('archive','JTOOLBAR_ARCHIVE');
 		if($this->state->get('filter.state') == -2){
-			JToolBarHelper::deleteList('', 'games.delete','JTOOLBAR_EMPTY_TRASH');
+			JToolBarHelper::deleteList('', 'delete','JTOOLBAR_EMPTY_TRASH');
 		}
 		else {
-			JToolBarHelper::trash('games.trash','JTOOLBAR_TRASH');
+			JToolBarHelper::trash('trash','JTOOLBAR_TRASH');
 		}
 
 		JToolBarHelper::divider();

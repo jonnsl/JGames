@@ -9,7 +9,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
-JLoader::register('GamesXhtml', JPATH_LIBRARIES.'/games/html/xhtml.php');
+JGImport('html.xhtml');
 
 /**
  * Utility class for games
@@ -39,12 +39,12 @@ abstract class JHtmlGames
 		}
 		
 		$src_thumb = preg_replace('/(\.jpg)$/i', '_thumb$1', $src);
-		$img = new GamesXhtml('img', array('alt' => htmlspecialchars($alt, ENT_COMPAT, 'UTF-8'), 'src' => $src_thumb));
+		$img = new JGXhtml('img', array('alt' => htmlspecialchars($alt, ENT_COMPAT, 'UTF-8'), 'src' => $src_thumb));
 		$html = $img;
 		
 		if ($link) {
 			JHtml::_('behavior.modal');
-			$a = new GamesXhtml('a', array('title' => htmlspecialchars($alt, ENT_COMPAT, 'UTF-8'), 'href' => $src, 'class' => 'modal'));
+			$a = new JGXhtml('a', array('title' => htmlspecialchars($alt, ENT_COMPAT, 'UTF-8'), 'href' => $src, 'class' => 'modal'));
 			$a->setHtml($img);
 			$html = $a;
 		}
@@ -59,7 +59,7 @@ abstract class JHtmlGames
 		foreach ($platforms as $platform)
 		{
 			$href = JRoute::_('index.php?option=com_games&view=game&id='.$game->id.'&platform='.$platform->id);
-			$a = new GamesXhtml('a', array('title' => htmlspecialchars($platform->title, ENT_COMPAT, 'UTF-8'), 'href' => $href));
+			$a = new JGXhtml('a', array('title' => htmlspecialchars($platform->title, ENT_COMPAT, 'UTF-8'), 'href' => $href));
 			if ($platform->id == $current) $a->addClass('current');
 			$a->setText($platform->title);
 			$html[] = (string)$a;

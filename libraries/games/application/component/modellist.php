@@ -32,8 +32,6 @@ class JGModelList extends JGModel
 	 */
 	protected $context;
 	
-	protected $events = array('group'=>'', 'change_state'=>'', 'before_delete'=>'', 'after_delete'=>'');
-
 	/**
 	 * An internal cache for the last query used.
 	 *
@@ -53,35 +51,6 @@ class JGModelList extends JGModel
 		// Guess the context as Option.ModelName.
 		if (empty($this->context)) {
 			$this->context = isset($config['context']) ? $config['context'] : strtolower($this->option.'.'.$this->getName());
-		}
-		
-		if (empty($this->events['group'])) {
-			$this->events['group'] = isset($config['events']['group']) ? $config['events']['group'] : $this->getPrefix();
-		}
-		
-		if (empty($this->events['change_state'])) {
-			$this->events['change_state'] = isset($config['events']['change_state']) ? 
-			$config['events']['change_state'] : 'on'.$view_item.'ChangeState';
-		}
-		
-		if (empty($this->events['before_delete'])) {
-			$this->events['before_delete'] = isset($config['events']['before_delete']) ? 
-			$config['events']['before_delete'] :'on'.$view_item.'BeforeDelete';
-		}
-		
-		if (empty($this->events['after_delete'])) {
-			$this->events['after_delete'] = isset($config['events']['after_delete']) ? 
-			$config['events']['after_delete'] : 'on'.$view_item.'AfterDelete';
-		}
-		
-		if (empty($this->events['getQuery'])) {
-			$this->events['getQuery'] = isset($config['events']['getQuery']) ? 
-			$config['events']['getQuery'] : 'on'.ucfirst($view_item).'GetQuery';
-		}
-		
-		if (empty($this->events['getStoreId'])) {
-			$this->events['getStoreId'] = isset($config['events']['getStoreId']) ? 
-			$config['events']['getStoreId'] : 'on'.ucfirst($view_item).'GetStoreId';
 		}
 	}
 
@@ -106,11 +75,6 @@ class JGModelList extends JGModel
 			$this->query = $this->getListQuery();
 		}
 		
-		// Include the content plugins for the on delete events.
-		JPluginHelper::importPlugin($this->events['group']);
-		
-		JDispatcher::getInstance()->trigger($this->events['getQuery'], array($this->query));
-
 		return $this->query;
 	}
 
@@ -131,7 +95,7 @@ class JGModelList extends JGModel
 
 		// Load the list items.
 		$query	= $this->_getListQuery();
-		$items	= $this->getList($query, $this->getState('list.start'), $this->getState('list.limit'));
+		$items	= $this->getList($query, $this->getStart(), $this->getState('list.limit'));
 
 		// Check for a database error.
 		if ($this->db->getErrorNum()) {
@@ -204,10 +168,37 @@ class JGModelList extends JGModel
 		// Create the pagination object.
 		jimport('joomla.html.pagination');
 		$limit = (int) $this->getState('list.limit') - (int) $this->getState('list.links');
-		$page = new JPagination($this->getTotal(), (int) $this->getState('list.start'), $limit);
+		$page = new JPagination($this->getTotal(), $this->getStart(), $limit);
 
 		// Add the object to the internal cache.
 		$this->cache[$store] = $page;
+
+		return $this->cache[$store];
+	}
+	
+	/**
+	 * Method to get the starting number of items for the data set.
+	 *
+	 * @return	integer	The starting number of items available in the data set.
+	 */
+	public function getstart()
+	{
+		$store = $this->getStoreId('getstart');
+
+		// Try to load the data from internal storage.
+		if (!empty($this->cache[$store])) {
+			return $this->cache[$store];
+		}
+
+		$start = $this->getState('list.start');
+		$limit = $this->getState('list.limit');
+		$total = $this->getTotal();
+		if ($start > $total - $limit) {
+			$start = max(0, (int)(ceil($total / $limit) - 1) * $limit);
+		}
+
+		// Add the total to the internal cache.
+		$this->cache[$store] = $start;
 
 		return $this->cache[$store];
 	}
@@ -224,11 +215,6 @@ class JGModelList extends JGModel
 	 */
 	protected function getStoreId($id = '')
 	{
-		// Include the content plugins for the on delete events.
-		JPluginHelper::importPlugin($this->events['group']);
-		
-		JDispatcher::getInstance()->trigger($this->events['getStoreId'], array(&$id));
-		
 		// Add the list state to the store id.
 		$id	.= ':'.$this->getState('list.start');
 		$id	.= ':'.$this->getState('list.limit');
@@ -286,7 +272,8 @@ class JGModelList extends JGModel
 		$app = JFactory::getApplication();
 		
 		// If the ordering and direction is set, assume that stateful lists are used.
-		if ($ordering && $direction) {
+		if ($ordering && $direction)
+		{
 			$value = $app->getUserStateFromRequest($this->context.'.ordercol', 'filter_order', $ordering);
 			if($value == '') $value = $ordering;
 			$this->setState('list.ordering', $value);

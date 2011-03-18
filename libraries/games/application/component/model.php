@@ -115,21 +115,23 @@ class JGModel extends JObject
 		$type		= preg_replace('/[^A-Z0-9_\.-]/i', '', $type);
 		$modelClass	= $prefix.ucfirst($type);
 
-		if (!class_exists($modelClass)) {
+		if (!class_exists($modelClass))
+		{
 			jimport('joomla.filesystem.path');
 			$path = JPath::find(
-				JModel::addIncludePath(),
-				JModel::_createFileName('model', array('name' => $type))
+				self::addIncludePath(),
+				self::_createFileName('model', array('name' => $type))
 			);
 			if ($path) {
 				require_once $path;
 
 				if (!class_exists($modelClass)) {
-					JError::raiseWarning(0, JText::sprintf('JLIB_APPLICATION_ERROR_MODELCLASS_NOT_FOUND', $modelClass ));
+					JError::raiseError(0, JText::sprintf('JLIB_APPLICATION_ERROR_MODELCLASS_NOT_FOUND', $modelClass ));
 					return false;
 				}
 			}
 			else return false;
+
 		}
 
 		return new $modelClass($config);
@@ -171,27 +173,6 @@ class JGModel extends JObject
 		if (!empty($config['ignore_request'])) {
 			$this->_state_set = true;
 		}
-	}
-
-	/**
-	 * Method to load and return a model object.
-	 *
-	 * @param	string	The name of the view
-	 * @param	string  The class prefix. Optional.
-	 * @return	mixed	Model object or boolean false if failed
-	 */
-	private function _createTable($name, $prefix = 'JTable', $config = array())
-	{
-		// Clean the model name
-		$name	= preg_replace('/[^A-Z0-9_]/i', '', $name);
-		$prefix = preg_replace('/[^A-Z0-9_]/i', '', $prefix);
-
-		//Make sure we are returning a DBO object
-		if (!isset($config['dbo']))  {
-			$config['dbo'] = $this->db;
-		}
-
-		return JTable::getInstance($name, $prefix, $config);;
 	}
 
 	/**
@@ -264,19 +245,26 @@ class JGModel extends JObject
 	 * @param	array	Configuration array for model. Optional.
 	 * @return	object
 	 */
-	public function getTable($name = '', $prefix = 'JTable', $options = array())
+	public function getTable($name = '', $prefix = 'JGTable', $options = array())
 	{
+		// Clean the table name
+		$name	= preg_replace('/[^A-Z0-9_]/i', '', $name);
+		$prefix = preg_replace('/[^A-Z0-9_]/i', '', $prefix);
+
 		if (empty($name)) {
 			$name = $this->getName();
 		}
 
-		if ($table = $this->_createTable($name, $prefix, $options))  {
-			return $table;
+		//Make sure we are returning a DBO object
+		if (!isset($options['dbo']))  {
+			$options['dbo'] = $this->db;
 		}
 
-		JError::raiseError(0, JText::sprintf('JLIB_APPLICATION_ERROR_TABLE_NAME_NOT_SUPPORTED', $name));
+		if(($table = JTable::getInstance($name, $prefix, $options)) === false) {
+			JError::raiseError(0, JText::sprintf('JLIB_APPLICATION_ERROR_TABLE_NAME_NOT_SUPPORTED', $name));
+		}
 
-		return null;
+		return $table;
 	}
 
 	/**

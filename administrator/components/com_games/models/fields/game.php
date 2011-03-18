@@ -39,17 +39,17 @@ class JFormFieldGame extends JFormField
 		$link = 'index.php?option=com_games&amp;view=games&amp;layout=modal&amp;tmpl=component&amp;field='.$this->id;
 
 		// Create a dummy text field with the game name.
-		$div	= new GamesXhtml('div', array('class' => 'fltlft'));
-		$input	= new GamesXhtml('input', array('type' => 'text','id' => $this->id.'_name', 'name' => $this->name.'[name]','value' => $this->value['name'], 'disabled' => true));
+		$div	= new JGXhtml('div', array('class' => 'fltlft'));
+		$input	= new JGXhtml('input', array('type' => 'text','id' => $this->id.'_name', 'name' => $this->name.'[name]','value' => $this->value['name'], 'disabled' => true));
 		$div->setHtml($input);
 		
 		$html[] = (string)$div;
 
 
 		// Create the game select button.
-		$div2	= new GamesXhtml('div', array('class' => 'button2-left'));
-		$div3	= new GamesXhtml('div', array('class' => 'blank'));
-		$a		= new GamesXhtml('a', array('class' => 'modal_'.$this->id, 'title' => JText::_('JLIB_FORM_CHANGE_USER'), 'href' => $link, 'rel' => "{handler: 'iframe', size: {x: 1000, y: 500}}"));
+		$div2	= new JGXhtml('div', array('class' => 'button2-left'));
+		$div3	= new JGXhtml('div', array('class' => 'blank'));
+		$a		= new JGXhtml('a', array('class' => 'modal_'.$this->id, 'title' => JText::_('JLIB_FORM_CHANGE_USER'), 'href' => $link, 'rel' => "{handler: 'iframe', size: {x: 1000, y: 500}}"));
 		$a->setText(JText::_('PLG_CONTENT_GAMES_SELECT_GAME'));
 		$div3->setHtml($a);
 		$div2->setHtml($div3);

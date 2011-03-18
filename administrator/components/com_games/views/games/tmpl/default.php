@@ -99,7 +99,7 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 				</td>
 				<td>
-					<a href="<?php echo JRoute::_('index.php?option=com_games&task=game.edit&id='.$item->id);?>">
+					<a href="<?php echo JRoute::_('index.php?option=com_games&controller=game&id='.$item->id);?>">
 						<?php echo $this->escape($item->title); ?>
 					</a>
 					<p class="smallsub">

@@ -23,7 +23,7 @@ class GamesModelGame extends JGModelForm
 	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
 	 * @return	mixed	A JForm object on success, false on failure
 	 */
-	public function getForm($loadData = true)
+	public function getForm($data = array(), $loadData = true)
 	{
 		return $this->loadForm('com_games.game', 'game', array('control' => 'jform', 'load_data' => $loadData));
 	}
@@ -31,10 +31,10 @@ class GamesModelGame extends JGModelForm
 	public function getPlatformsParams()
 	{
 		$db = $this->db;
-		$query = $db->getQuery(true);
-		$query->select('c.id, c.params');
-		$query->from('#__categories as c');
-		$query->where('c.extension = "com_games.platforms"');
+		$query = $db->getQuery(true)
+			->select('c.id, c.params')
+			->from('#__categories as c')
+			->where('c.extension = "com_games.platforms"');
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
 		$params = array();

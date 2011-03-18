@@ -25,7 +25,7 @@ JHtml::_('stylesheet', 'games/addgame.css', array(), true);
 <!--
 Joomla.submitbutton = function(task)
 {
-	if (task == 'game.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
+	if (task == 'cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
 		<?php echo $this->form->getField('description')->save(); ?>
 		Joomla.submitform(task);
 	}
