@@ -2,7 +2,12 @@
 /.project
 /includes
 /installation
-/libraries
+/libraries/joomla
+/libraries/phpmailer
+/libraries/phputf8
+/libraries/simplepie
+/libraries/index.html
+/libraries/loader.php
 /logs
 /modules
 /templates

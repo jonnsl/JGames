@@ -9,10 +9,12 @@
 // No direct access
 defined('_JEXEC') or die;
 
+JGImport('application.component.controller');
+JGImport('utilities.inflect');
 /**
  *
  */
-class GamesControllerForm extends GamesController
+class JGControllerForm extends JGController
 {
 	/**
 	 * Redirect info
@@ -85,7 +87,7 @@ class GamesControllerForm extends GamesController
 
 		// Guess the list view as the plural of the item view.
 		if (empty($this->view_list)) {
-			$this->view_list = Inflect::pluralize($this->view_item);
+			$this->view_list = JGInflect::pluralize($this->view_item);
 		}
 
 		// Setup redirect info.

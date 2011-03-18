@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  *
  * @since 1.0
  */
-class GamesControllerList extends GamesController
+class JGControllerList extends JGController
 {
 	/**
 	 * The URL option for the component.

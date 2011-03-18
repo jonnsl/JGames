@@ -9,10 +9,12 @@
 // No direct access
 defined('_JEXEC') or die;
 
+JGImport('application.component.modelList');
+
 /**
  *
  */
-class GamesModelAjax extends GamesModelList
+class GamesModelAjax extends JGModelList
 {
 	/**
 	 * Method to auto-populate the model state.
@@ -83,8 +85,8 @@ class GamesModelAjax extends GamesModelList
 	protected function getList($query, $limitstart = 0, $limit = 0)
 	{
 		$this->db->setQuery($query, $limitstart, $limit);
-		$results = GamesArrayHelper::excludeEmptyValues($this->db->loadResultArray());
-		$results = GamesArrayHelper::resetKeys($results);
+		$results = JGArrayHelper::excludeEmptyValues($this->db->loadResultArray());
+		$results = JGArrayHelper::resetKeys($results);
 
 		return $results;
 	}

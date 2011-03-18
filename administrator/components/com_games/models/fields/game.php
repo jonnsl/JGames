@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.form.formfield');
-require dirname(__FILE__).'/../../libraries/html/xhtml.php';
+JGImport('html.xhtml');
 
 class JFormFieldGame extends JFormField
 {

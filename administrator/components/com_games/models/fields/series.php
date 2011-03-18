@@ -12,9 +12,9 @@ defined('_JEXEC') or die;
 require JPATH_ADMINISTRATOR.'/components/com_games/loader.php';
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
-jimport('joomla.application.component.model');
+JGImport('application.component.model');
 JHtml::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_games/helpers/html');
-JModel::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_games/models');
+JGModel::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_games/models');
 
 class JFormFieldSeries extends JFormFieldList
 {
@@ -34,7 +34,7 @@ class JFormFieldSeries extends JFormFieldList
 	{
 		// Initialize variables.
 		$options = array();
-		$series = JModel::getInstance('Games', 'GamesModel', array('ignore_request' => true))->getSeries();
+		$series = JGModel::getInstance('Games', 'GamesModel', array('ignore_request' => true))->getSeries();
 
 		foreach ($series as $option) {
 			$options[] = JHtml::_('select.option', $option['value'], $option['text'], 'value', 'text');

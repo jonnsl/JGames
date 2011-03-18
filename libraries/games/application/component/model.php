@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 /**
  *
  */
-class GamesModel extends JObject
+class JGModel extends JObject
 {
 	/**
 	 * Database Connector

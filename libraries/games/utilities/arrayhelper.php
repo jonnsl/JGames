@@ -9,10 +9,12 @@
 // No direct access
 defined('_JEXEC') or die;
 
+jimport('joomla.utilities.arrayHelper');
+
 /**
  *
  */
-class GamesArrayHelper extends JArrayHelper
+class JGArrayHelper extends JArrayHelper
 {
 	/**
 	 * Utility function to map an array to a object.
@@ -28,7 +30,7 @@ class GamesArrayHelper extends JArrayHelper
 		if (is_array($array)) {
 			foreach ($array as $k => $v) {
 				if ($recursive && is_array($v)) {
-					$obj->$k = GamesArrayHelper::toObject($v, $class, true);
+					$obj->$k = self::toObject($v, $class, true);
 				} else {
 					$obj->$k = $v;
 				}

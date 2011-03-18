@@ -15,8 +15,8 @@ if (!JFactory::getUser()->authorise('core.manage', 'com_games')) {
 }
 
 // Include dependencies
-require_once(dirname(__FILE__).'/loader.php');
+JGImport('application.component.controller');
 
-$controller = GamesController::getInstance('Games');
+$controller = JGController::getInstance('Games');
 $controller->execute(JRequest::getCmd('task'));
 $controller->redirect();

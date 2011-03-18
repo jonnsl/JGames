@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  *
  * @since 1.0
  */
-class GamesController extends JObject
+class JGController extends JObject
 {
 	/**
 	 * The base path of the controller
@@ -220,7 +220,7 @@ class GamesController extends JObject
 	public function __construct($config = array())
 	{
 		// Determine the methods to exclude from the base class.
-		$xMethods = get_class_methods('GamesController');
+		$xMethods = get_class_methods('JGController');
 
 		// Get the public methods in this class using reflection.
 		$r			= new ReflectionClass($this);

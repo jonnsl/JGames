@@ -9,12 +9,11 @@
 // No direct access
 defined('_JEXEC') or die;
 
-require JPATH_ADMINISTRATOR.'/components/com_games/loader.php';
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
-jimport('joomla.application.component.model');
+JGImport('application.component.model');
 JHtml::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_games/helpers/html');
-JModel::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_games/models');
+JGModel::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_games/models');
 
 
 class JFormFieldPublishers extends JFormFieldList
@@ -35,7 +34,7 @@ class JFormFieldPublishers extends JFormFieldList
 	{
 		// Initialize variables.
 		$options = array();
-		$publishers = JModel::getInstance('Games', 'GamesModel', array('ignore_request' => true))->getPublishers();
+		$publishers = JGModel::getInstance('Games', 'GamesModel', array('ignore_request' => true))->getPublishers();
 
 		foreach ($publishers as $option) {
 			$options[] = JHtml::_('select.option', $option['value'], $option['text'], 'value', 'text');

@@ -10,11 +10,12 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.form.form');
+JGImport('application.component.modelForm');
 
 /**
  *
  */
-class GamesModelGame extends GamesModelForm
+class GamesModelGame extends JGModelForm
 {
 	/**
 	 * Method to get the record form.

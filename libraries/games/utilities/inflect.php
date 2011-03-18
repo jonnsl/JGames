@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  * 
  * @link: http://kuwamoto.org/2007/12/17/improved-pluralizing-in-php-actionscript-and-ror/
  */
-class Inflect
+class JGInflect
 {
     static $plural = array(
         '/(quiz)$/i'               => "$1zes",

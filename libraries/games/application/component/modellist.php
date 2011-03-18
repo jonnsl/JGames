@@ -9,10 +9,13 @@
 // No direct access
 defined('_JEXEC') or die;
 
+JGImport('application.component.model');
+JGImport('utilities.inflect');
+
 /**
  *
  */
-class GamesModelList extends GamesModel
+class JGModelList extends JGModel
 {
 	/**
 	 * Internal memory based cache array of data.
@@ -45,7 +48,7 @@ class GamesModelList extends GamesModel
 	{
 		parent::__construct($config);
 		
-		$view_item = Inflect::singularize($this->getName());
+		$view_item = JGInflect::singularize($this->getName());
 
 		// Guess the context as Option.ModelName.
 		if (empty($this->context)) {

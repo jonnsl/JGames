@@ -9,10 +9,12 @@
 // No direct access
 defined('_JEXEC') or die;
 
+JGImport('database.table');
+
 /**
  * Table class
  */
-class JTableGame extends GamesTable
+class JTableGame extends JGTable
 {
 	public $genres;
 	public $platforms;
@@ -25,8 +27,8 @@ class JTableGame extends GamesTable
 	{
 		if(empty($this->alias)) $this->alias = $this->title;
 		$this->alias = JApplication::stringURLSafe($this->alias);
-		$this->genres = GamesArrayHelper::excludeEmptyValues($this->genres);
-		$this->platforms = GamesArrayHelper::excludeEmptyValues($this->platforms);
+		$this->genres = JGArrayHelper::excludeEmptyValues($this->genres);
+		$this->platforms = JGArrayHelper::excludeEmptyValues($this->platforms);
 
 		return true;
 	}

@@ -9,6 +9,9 @@
 // No direct access
 defined('_JEXEC') or die;
 
+jimport('joomla.application.component.view');
+require dirname(__FILE__).'/../../helpers/games.php';
+
 /**
  *
  */

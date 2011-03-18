@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 /**
  *
  */
-class GamesTable extends JTable
+class JGTable extends JTable
 {
 	/**
 	 * Method to set the publishing state for a row or list of rows in the database

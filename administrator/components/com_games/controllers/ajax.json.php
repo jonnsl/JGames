@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 /**
  *
  */
-class GamesControllerAjax extends GamesController
+class GamesControllerAjax extends JGController
 {
 	public function __construct($config = array())
 	{

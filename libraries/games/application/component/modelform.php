@@ -9,10 +9,13 @@
 // No direct access
 defined('_JEXEC') or die;
 
+JGImport('application.component.model');
+JGImport('utilities.arrayHelper');
+
 /**
  *
  */
-abstract class GamesModelForm extends GamesModel
+abstract class JGModelForm extends JGModel
 {
 	/**
 	 * Array of form objects.
@@ -265,7 +268,7 @@ abstract class GamesModelForm extends GamesModel
 		}
 
 		// Convert to the JObject before adding other data.
-		$item = GamesArrayHelper::toObject($table->getProperties(1), 'JObject');
+		$item = JGArrayHelper::toObject($table->getProperties(1), 'JObject');
 
 		if (property_exists($item, 'params')) {
 			$registry = new JRegistry($item->params);
