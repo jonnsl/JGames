@@ -37,6 +37,10 @@ abstract class JHtmlGames
 				}
 			}
 		}
+		if (empty($src))
+		{
+			$src = self::getDefaultBoxart();
+		}
 		
 		$src_thumb = preg_replace('/(\.jpg)$/i', '_thumb$1', $src);
 		$img = new JGXhtml('img', array('alt' => htmlspecialchars($alt, ENT_COMPAT, 'UTF-8'), 'src' => $src_thumb));
@@ -66,6 +70,25 @@ abstract class JHtmlGames
 		}
 		
 		return implode(' / ', $html);
+	}
+	
+	public function getDefaultBoxart()
+	{
+		static $default;
+		if(empty($default))
+		{
+			$db = JFactory::getDbo();
+			$query = $db->getQuery(true)
+				->select('params')
+				->from('#__categories as c')
+				->where('c.extension = '.$db->quote('com_games.platforms'))
+				->order('lft ASC');
+			$db->setQuery($query, 0, 1);
+			$params = new JRegistry($db->loadResult());
+			$default = $params->get('default_boxart', 'images/games/boxarts/noboxshot.gif');
+		}
+
+		return $default;
 	}
 
 	/**
