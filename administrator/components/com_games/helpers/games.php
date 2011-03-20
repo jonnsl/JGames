@@ -18,7 +18,7 @@ class GamesHelper extends JObject
 	{
 		JSubMenuHelper::addEntry(
 			JText::_('COM_GAMES_GAMES'),
-			'index.php?option=com_games&view=games',
+			'index.php?option=com_games',
 			$vName == 'games'
 		);
 		JSubMenuHelper::addEntry(

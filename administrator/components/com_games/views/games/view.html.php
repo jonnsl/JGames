@@ -52,21 +52,21 @@ class GamesViewGames extends JView
 		JHtml::_('script', 'games/toolbar.js', false, true);
 		JToolBarHelper::title(JText::_('COM_GAMES_GAMES'), 'games');
 
-		JGToolBarHelper::addNew();
-		JGToolBarHelper::edit();
+		JGToolBarHelper::addNew('game');
+		JGToolBarHelper::edit('game');
 
 		JToolBarHelper::divider();
-		JGToolBarHelper::publish();
-		JGToolBarHelper::unpublish();
+		JGToolBarHelper::publish('games');
+		JGToolBarHelper::unpublish('games');
 
 		JToolBarHelper::divider();
-		JGToolBarHelper::archive();
-		if($this->state->get('filter.state') == -2){
-			JGToolBarHelper::delete();
-		}
+		JGToolBarHelper::archive('games');
+		//if($this->state->get('filter.state') == -2){
+			JGToolBarHelper::delete('games');
+		/*}
 		else {
-			JGToolBarHelper::trash();
-		}
+			JGToolBarHelper::trash('games');
+		}*/
 
 		JToolBarHelper::divider();
 		JToolBarHelper::preferences('com_games');
