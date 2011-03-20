@@ -255,10 +255,10 @@ class JGController extends JObject
 	/**
 	 * Adds to the search path for templates and resources.
 	 *
-	 * @param	string			The path type (e.g. 'model', 'view'.
+	 * @param	string			The path type (e.g. 'model', 'view').
 	 * @param	string|array	The directory or stream to search.
 	 * @return	JController		This object to support chaining.
-	 * @since	1.6				Replaces _addPath.
+
 	 */
 	protected function addPath($type, $path)
 	{
