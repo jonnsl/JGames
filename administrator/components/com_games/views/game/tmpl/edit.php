@@ -135,6 +135,7 @@ window.addEvent('domready',function(){
 	<?php echo JHtml::_('sliders.end'); ?>
 	</div>
 
+	<input type="hidden" name="controller" value="" />
 	<input type="hidden" name="task" value="" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>

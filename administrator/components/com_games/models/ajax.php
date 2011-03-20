@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 JGImport('application.component.modelList');
+JGImport('utilities.arrayHelper');
 
 /**
  *

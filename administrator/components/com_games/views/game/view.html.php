@@ -38,23 +38,25 @@ class GamesViewGame extends JView
 	 */
 	protected function addToolbar()
 	{
+		JGImport('toolbar.helper');
+		JToolBar::getInstance('toolbar')->addButtonPath(JPATH_LIBRARIES.'/games/toolbar/button');
+		JHtml::_('script', 'games/toolbar.js', false, true);
 		JRequest::setVar('hidemainmenu', true);
 
-		$user		= JFactory::getUser();
-		$isNew		= ($this->item->id == 0);
+		$isNew = ($this->item->id == 0);
 
 		JToolBarHelper::title(JText::_('COM_GAMES_PAGE_'.($isNew ? 'ADD' : 'EDIT').'_GAME'), 'game-add');
 
-		JToolBarHelper::apply('apply', 'JTOOLBAR_APPLY');
-		JToolBarHelper::save('save', 'JTOOLBAR_SAVE');
-		JToolBarHelper::custom('save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
+		JGToolBarHelper::apply('game');
+		JGToolBarHelper::save('game');
+		JGToolBarHelper::save2new('game');
 
 		// If an existing item, can save to a copy.
 		if (!$isNew ) {
-			JToolBarHelper::custom('save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
-			JToolBarHelper::cancel('cancel', 'JTOOLBAR_CANCEL');
+			JGToolBarHelper::save2copy('game');
+			JGToolBarHelper::cancel('game');
 		} else {
-			JToolBarHelper::cancel('cancel', 'JTOOLBAR_CLOSE');
+			JGToolBarHelper::close('game');
 		}
 
 		JToolBarHelper::divider();

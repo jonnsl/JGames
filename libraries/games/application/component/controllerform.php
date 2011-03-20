@@ -296,9 +296,8 @@ class JGControllerForm extends JGController
 				return $this->display();
 			}
 
-			// Reset the ID and then treat the request as for Apply.
+			// Reset the ID.
 			$data[$key]	= 0;
-			$task		= 'apply';
 		}
 
 		// Access check.
@@ -375,6 +374,10 @@ class JGControllerForm extends JGController
 		// Redirect the user and adjust session state based on the chosen task.
 		switch ($task)
 		{
+			case 'save2copy':
+				// Set the record data in the session.
+				$app->setUserState($context.'.data', null);
+				return $this->display();
 			case 'apply':
 				// Set the record data in the session.
 				$app->setUserState($context.'.id', $recordId);

@@ -47,22 +47,25 @@ class GamesViewGames extends JView
 
 	protected function addToolbar()
 	{
+		JGImport('toolbar.helper');
+		JToolBar::getInstance('toolbar')->addButtonPath(JPATH_LIBRARIES.'/games/toolbar/button');
+		JHtml::_('script', 'games/toolbar.js', false, true);
 		JToolBarHelper::title(JText::_('COM_GAMES_GAMES'), 'games');
 
-		JToolBarHelper::addNew('game.add', 'JTOOLBAR_NEW');
-		JToolBarHelper::editList('game.edit', 'JTOOLBAR_EDIT');
+		JGToolBarHelper::addNew();
+		JGToolBarHelper::edit();
 
 		JToolBarHelper::divider();
-		JToolBarHelper::publishList('publish', 'JTOOLBAR_PUBLISH');
-		JToolBarHelper::unpublishList('unpublish', 'JTOOLBAR_UNPUBLISH');
+		JGToolBarHelper::publish();
+		JGToolBarHelper::unpublish();
 
 		JToolBarHelper::divider();
-		JToolBarHelper::archiveList('archive','JTOOLBAR_ARCHIVE');
+		JGToolBarHelper::archive();
 		if($this->state->get('filter.state') == -2){
-			JToolBarHelper::deleteList('', 'delete','JTOOLBAR_EMPTY_TRASH');
+			JGToolBarHelper::delete();
 		}
 		else {
-			JToolBarHelper::trash('trash','JTOOLBAR_TRASH');
+			JGToolBarHelper::trash();
 		}
 
 		JToolBarHelper::divider();

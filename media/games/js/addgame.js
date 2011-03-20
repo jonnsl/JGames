@@ -21,9 +21,9 @@ window.addEvent('domready',function(){
 	/*
 	 * Auto complete
 	 */
-	new Meio.Autocomplete($('jform_developer'), 'index.php?option=com_games&task=ajax.autoComplete&w=developer&format=json');
-	new Meio.Autocomplete($('jform_publisher'), 'index.php?option=com_games&task=ajax.autoComplete&w=publisher&format=json');
-	new Meio.Autocomplete($('jform_serie'), 'index.php?option=com_games&task=ajax.autoComplete&w=serie&format=json');
+	new Meio.Autocomplete($('jform_developer'),	'index.php?option=com_games&controller=ajax&w=developer&format=json');
+	new Meio.Autocomplete($('jform_publisher'),	'index.php?option=com_games&controller=ajax&w=publisher&format=json');
+	new Meio.Autocomplete($('jform_serie'),		'index.php?option=com_games&controller=ajax&w=serie&format=json');
 
 	/*
 	 * Pegi and ESRB rating behaviour
