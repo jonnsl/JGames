@@ -39,7 +39,7 @@ abstract class JHtmlGames
 		}
 		if (empty($src))
 		{
-			$src = self::getDefaultBoxart();
+			$src = self::getDefaultBoxart($platform);
 		}
 		
 		$src_thumb = preg_replace('/(\.jpg)$/i', '_thumb$1', $src);
@@ -72,7 +72,7 @@ abstract class JHtmlGames
 		return implode(' / ', $html);
 	}
 	
-	public function getDefaultBoxart()
+	public function getDefaultBoxart($platform)
 	{
 		static $default;
 		if(empty($default))
@@ -83,6 +83,7 @@ abstract class JHtmlGames
 				->from('#__categories as c')
 				->where('c.extension = '.$db->quote('com_games.platforms'))
 				->order('lft ASC');
+			if($platform) $query->where('c.id ='.$db->quote($platform));
 			$db->setQuery($query, 0, 1);
 			$params = new JRegistry($db->loadResult());
 			$default = $params->get('default_boxart', 'images/games/boxarts/noboxshot.gif');
