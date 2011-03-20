@@ -88,7 +88,7 @@ abstract class JGToolBarHelper
 	 * @param	string	$task		An override for the task.
 	 * @param	string	$alt		An override for the alt text.
 	 */
-	public static function delete($controller = '', $task = 'remove', $alt = 'JTOOLBAR_DELETE')
+	public static function delete($controller = '', $task = 'delete', $alt = 'JTOOLBAR_DELETE')
 	{
 		JToolBar::getInstance('toolbar')
 			->appendButton('Standard', 'delete', $alt, $task, $controller, false);
@@ -101,7 +101,7 @@ abstract class JGToolBarHelper
 	 * @param	string	$task		An override for the task.
 	 * @param	string	$alt		An override for the alt text.
 	 */
-	public static function trash($controller = '', $task = 'remove', $alt = 'JTOOLBAR_TRASH')
+	public static function trash($controller = '', $task = 'trash', $alt = 'JTOOLBAR_TRASH')
 	{
 		JToolBar::getInstance('toolbar')
 			->appendButton('Standard', 'trash', $alt, $task, $controller, false);
