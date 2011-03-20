@@ -25,7 +25,7 @@ abstract class JGToolBarHelper
 	 */
 	public static function addNew($controller = '', $task = 'add', $alt = 'JTOOLBAR_NEW')
 	{
-		$bar = JToolBar::getInstance('toolbar')
+		JToolBar::getInstance('toolbar')
 			->appendButton('Standard', 'new', $alt, $task, $controller, false);
 	}
 
@@ -38,7 +38,7 @@ abstract class JGToolBarHelper
 	 */
 	public static function edit($controller = '', $task = 'edit', $alt = 'JTOOLBAR_EDIT')
 	{
-		$bar = JToolBar::getInstance('toolbar')
+		JToolBar::getInstance('toolbar')
 			->appendButton('Standard', 'edit', $alt, $task, $controller, false);
 	}
 
@@ -51,7 +51,7 @@ abstract class JGToolBarHelper
 	 */
 	public static function publish($controller = '', $task = 'publish', $alt = 'JTOOLBAR_PUBLISH')
 	{
-		$bar = JToolBar::getInstance('toolbar')
+		JToolBar::getInstance('toolbar')
 			->appendButton('Standard', 'publish', $alt, $task, $controller, false);
 	}
 
@@ -64,7 +64,7 @@ abstract class JGToolBarHelper
 	 */
 	public static function unpublish($controller = '', $task = 'unpublish', $alt = 'JTOOLBAR_UNPUBLISH')
 	{
-		$bar = JToolBar::getInstance('toolbar')
+		JToolBar::getInstance('toolbar')
 			->appendButton('Standard', 'unpublish', $alt, $task, $controller, false);
 	}
 
@@ -77,7 +77,7 @@ abstract class JGToolBarHelper
 	 */
 	public static function archive($controller = '', $task = 'archive', $alt = 'JTOOLBAR_ARCHIVE')
 	{
-		$bar = JToolBar::getInstance('toolbar')
+		JToolBar::getInstance('toolbar')
 			->appendButton('Standard', 'archive', $alt, $task, $controller, false);
 	}
 
@@ -90,7 +90,7 @@ abstract class JGToolBarHelper
 	 */
 	public static function delete($controller = '', $task = 'remove', $alt = 'JTOOLBAR_DELETE')
 	{
-		$bar = JToolBar::getInstance('toolbar')
+		JToolBar::getInstance('toolbar')
 			->appendButton('Standard', 'delete', $alt, $task, $controller, false);
 	}
 
@@ -103,7 +103,7 @@ abstract class JGToolBarHelper
 	 */
 	public static function trash($controller = '', $task = 'remove', $alt = 'JTOOLBAR_TRASH')
 	{
-		$bar = JToolBar::getInstance('toolbar')
+		JToolBar::getInstance('toolbar')
 			->appendButton('Standard', 'trash', $alt, $task, $controller, false);
 	}
 
@@ -116,7 +116,7 @@ abstract class JGToolBarHelper
 	 */
 	public static function apply($controller = '', $task = 'apply', $alt = 'JTOOLBAR_APPLY')
 	{
-		$bar = JToolBar::getInstance('toolbar')
+		JToolBar::getInstance('toolbar')
 			->appendButton('Standard', 'apply', $alt, $task, $controller, false);
 	}
 
@@ -129,7 +129,7 @@ abstract class JGToolBarHelper
 	 */
 	public static function save($controller = '', $task = 'save', $alt = 'JTOOLBAR_SAVE')
 	{
-		$bar = JToolBar::getInstance('toolbar')
+		JToolBar::getInstance('toolbar')
 			->appendButton('Standard', 'save', $alt, $task, $controller, false);
 	}
 
@@ -142,7 +142,7 @@ abstract class JGToolBarHelper
 	 */
 	public static function save2new($controller = '', $task = 'save2new', $alt = 'JTOOLBAR_SAVE_AND_NEW')
 	{
-		$bar = JToolBar::getInstance('toolbar')
+		JToolBar::getInstance('toolbar')
 			->appendButton('Standard', 'save-new', $alt, $task, $controller, false);
 	}
 
@@ -155,7 +155,7 @@ abstract class JGToolBarHelper
 	 */
 	public static function save2copy($controller = '', $task = 'save2copy', $alt = 'JTOOLBAR_SAVE_AS_COPY')
 	{
-		$bar = JToolBar::getInstance('toolbar')
+		JToolBar::getInstance('toolbar')
 			->appendButton('Standard', 'save-copy', $alt, $task, $controller, false);
 	}
 
@@ -168,7 +168,7 @@ abstract class JGToolBarHelper
 	 */
 	public static function cancel($controller = '', $task = 'cancel', $alt = 'JTOOLBAR_CANCEL')
 	{
-		$bar = JToolBar::getInstance('toolbar')
+		JToolBar::getInstance('toolbar')
 			->appendButton('Standard', 'cancel', $alt, $task, $controller, false);
 	}
 
@@ -181,7 +181,7 @@ abstract class JGToolBarHelper
 	 */
 	public static function close($controller = '', $task = 'cancel', $alt = 'JTOOLBAR_CLOSE')
 	{
-		$bar = JToolBar::getInstance('toolbar')
+		JToolBar::getInstance('toolbar')
 			->appendButton('Standard', 'cancel', $alt, $task, $controller, false);
 	}
 }
