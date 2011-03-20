@@ -18,8 +18,7 @@
 				label="COM_GAMES_FIELD_GENRES_LABEL"
 				description="COM_GAMES_FIELD_GENRES_DESC"
 				default=""
-				class="inputbox"
-				multiple="true" >
+				class="inputbox" >
 				<option
 					value="">COM_GAMES_OPTION_ANY_GENRE</option>
 			</field>
@@ -31,8 +30,7 @@
 				label="COM_GAMES_FIELD_PLATFORMS_LABEL"
 				description="COM_GAMES_FIELD_PLATFORMS_DESC"
 				default=""
-				class="inputbox"
-				multiple="true" >
+				class="inputbox" >
 				<option
 					value="">COM_GAMES_OPTION_ANY_PLATFORM</option>
 			</field>
@@ -42,8 +40,7 @@
 				type="series"
 				label="COM_GAMES_FIELD_SERIE_LABEL"
 				description="COM_GAMES_FIELD_SERIE_DESC"
-				class="inputbox"
-				multiple="true" >
+				class="inputbox" >
 				<option
 					value="">COM_GAMES_OPTION_ANY_SERIE</option>
 			</field>
@@ -53,8 +50,7 @@
 				type="publishers"
 				label="COM_GAMES_FIELD_PUBLISHER_LABEL"
 				description="COM_GAMES_FIELD_PUBLISHER_DESC"
-				class="inputbox"
-				multiple="true" >
+				class="inputbox" >
 				<option
 					value="">COM_GAMES_OPTION_ANY_PUBLISHER</option>
 			</field>
@@ -64,8 +60,7 @@
 				type="developers"
 				label="COM_GAMES_FIELD_DEVELOPER_LABEL"
 				description="COM_GAMES_FIELD_DEVELOPER_DESC"
-				class="inputbox"
-				multiple="true" >
+				class="inputbox" >
 				<option
 					value="">COM_GAMES_OPTION_ANY_DEVELOPER</option>
 			</field>
