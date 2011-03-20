@@ -17,17 +17,6 @@ JGImport('application.component.modelForm');
  */
 class GamesModelGame extends JGModelForm
 {
-	/**
-	 * Method to get the record form.
-	 *
-	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
-	 * @return	mixed	A JForm object on success, false on failure
-	 */
-	public function getForm($data = array(), $loadData = true)
-	{
-		return $this->loadForm('com_games.game', 'game', array('control' => 'jform', 'load_data' => $loadData));
-	}
-
 	public function getPlatformsParams()
 	{
 		$db = $this->db;

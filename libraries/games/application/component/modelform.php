@@ -101,7 +101,14 @@ abstract class JGModelForm extends JGModel
 	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
 	 * @return	mixed	A JForm object on success, false on failure
 	 */
-	abstract public function getForm($data = array(), $loadData = true);
+	public function getForm($data = array(), $loadData = true)
+	{
+		if (!empty($data)) {
+			$this->setState($this->getName().'.data', $data);
+		}
+		$context = $this->option.'.'.$this->getName();
+		return $this->loadForm($context, $this->getName(), array('control' => 'jform', 'load_data' => $loadData));
+	}
 
 	/**
 	 * Method to get a form object.
