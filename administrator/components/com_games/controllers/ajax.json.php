@@ -38,4 +38,21 @@ class GamesControllerAjax extends JGController
 
 		echo json_encode($items);
 	}
+	
+	public function InstallSampleData()
+	{
+		$json = array();
+		if(!$this->model->InstallSampleData())
+		{
+			$json['success'] = false;
+			$json['msg'] = JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $this->model->getError());
+		}
+		else
+		{
+			$json['success'] = true;
+			$json['msg'] = JText::_('COM_GAMES_INSTALL_SAMPLE_DATA_SUCCESS');
+		}
+		
+		echo json_encode($json);
+	}
 }

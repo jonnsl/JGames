@@ -20,7 +20,7 @@ class GamesModelAjax extends JGModelList
 	/**
 	 * Method to auto-populate the model state.
 	 */
-	protected function populateState()
+	protected function populateState($ordering = null, $direction = null)
 	{
 		// Query to search for
 		$q = JRequest::getString('q', '');
@@ -92,4 +92,65 @@ class GamesModelAjax extends JGModelList
 		return $results;
 	}
 
+	public function InstallSampleData()
+	{
+		jimport('joomla.database.table');
+		$data = array
+		(
+			'id' => null,
+		    'note' => '',
+		    'description' => '',
+		    'published' => 1,
+		    'access' => 1,
+		    'parent_id' => 1,
+		    'level' => 1,
+		    'metadesc' => '',
+		    'metakey' => '',
+		    'created_user_id' => 0,
+		    'language' => '*',
+		    'params' => array
+		        (
+		            'category_layout' => '',
+		            'image' => '',
+		            'width' => 120,
+		            'height' => 165,
+		            'default_boxart' => 'images/games/boxarts/noboxshot.gif'
+		        ),
+		
+		    'metadata' => ''
+		
+		);
+		// Platforms
+		$data['extension'] = 'com_games.platforms';
+		$platforms = array('PC', 'Playstation 3', 'Playstation 2', 'Playstation', 'X-Box 360', 'X-Box', 'Nintendo wii', 'Game Cube', 'Nintendo 64', 'PSP', 'Nintendo DS');
+		foreach($platforms as $platfom)
+		{
+			$table = JTable::getInstance('category');
+			if(!$table->bind(array_merge($data, array('title' => $platfom)))
+			|| !$table->check()
+			|| !$table->setLocation(1, 'last-child')
+			|| !$table->store())
+			{
+				$this->setError($table->getError());
+				return false;
+			}
+		}
+		
+		// Genres
+		$data['extension'] = 'com_games.genres';
+		$genres = array('Action', 'Adventure', 'Shooter', 'Strategy');
+		foreach($genres as $genre)
+		{
+			$table = JTable::getInstance('category');
+			if(!$table->bind(array_merge($data, array('title' => $genre)))
+			|| !$table->check()
+			|| !$table->setLocation(1, 'last-child')
+			|| !$table->store())
+			{
+				$this->setError($table->getError());
+				return false;
+			}
+		}
+		return true;
+	}
 }

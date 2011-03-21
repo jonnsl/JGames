@@ -42,7 +42,10 @@ class Com_GamesInstallerScript
 			}
 		}
 		$status->libraries[] = array('name' => 'JGames Libraries', 'result' => $result);
+		
+		JHtml::_('script', 'games/InstallSampleData.js', true, true);
 ?>
+		<input type="button" id="InstallSampleData" value="Install Sample Data"/>
 		<table class="adminlist">
 			<thead>
 				<tr>
