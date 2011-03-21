@@ -8,8 +8,8 @@
 	<license>GNU General Public License version 3</license>
 	<authorEmail>admin@joomla.org</authorEmail>
 	<authorUrl>www.joomla.org</authorUrl>
-	<version>1.6.0</version>
-	<description>PLG_REMEMBER_XML_DESCRIPTION</description>
+	<version>Alpha 1</version>
+	<description></description>
 	<files>
 		<filename plugin="games">games.php</filename>
 		<folder>override</folder>
