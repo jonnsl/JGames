@@ -115,7 +115,6 @@ class JGControllerForm extends JGController
 	 */
 	public function add()
 	{
-		JError::raiseWarning(0, 'verifying permissions for add');
 		// Initialise variables.
 		$app		= JFactory::getApplication();
 		$context	= $this->option.'.edit.'.$this->context;
@@ -187,7 +186,6 @@ class JGControllerForm extends JGController
 	 */
 	public function cancel()
 	{
-		JError::raiseWarning(0, 'cancelling');
 		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Initialise variables.
@@ -223,7 +221,6 @@ class JGControllerForm extends JGController
 	 */
 	public function edit()
 	{
-		JError::raiseWarning(0, 'verifying permissions for editing');
 		// Initialise variables.
 		$app		= JFactory::getApplication();
 		$model		= $this->getModel();
@@ -266,7 +263,6 @@ class JGControllerForm extends JGController
 	 */
 	public function save()
 	{
-		JError::raiseWarning(0, 'verifying permissions for save');
 		// Check for request forgeries.
 		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
