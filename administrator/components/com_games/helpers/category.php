@@ -13,6 +13,6 @@ class GamesPlatformsHelperCategory
 {
 
 	public static function onPrepareForm($form)	{
-		$form->removeField('parent_id');
+		$form->setFieldAttribute('parent_id', 'type', 'hidden');
 	}
 }
