@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="library" version="1.6">
+	<name>JGames Libraries</name>
+	<author>Jonnathan Soares Lima</author>
+	<authorEmail>jonnsl@hotmail.com</authorEmail>
+	<copyright>(C) 2011 Copyleft - all rights reversed</copyright>
+	<license>GNU General Public License version 3</license>
+	<version>1.0</version>
+	<creationDate>October 2010</creationDate>
+	<description>COM_GAMES_XML_DESCRIPTION</description>
+	<libraryname>games</libraryname>
+	<files>
+		<folder>application</folder>
+		<folder>database</folder>
+		<folder>html</folder>
+		<folder>toolbar</folder>
+		<folder>utilities</folder>
+		<file>index.html</file>
+		<file>loader.php</file>
+	</files>
+</extension>

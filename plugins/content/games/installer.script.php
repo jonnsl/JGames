@@ -23,12 +23,4 @@ class plgContentGamesInstallerScript
 		$db->setQuery('DROP TABLE IF EXISTS `'.$prefix.'games_content`');
 		return (bool)$db->query();
 	}
-	
-	public function postflight()
-	{
-		$prefix = JFactory::getConfig()->get('dbprefix', 'jos_');
-		$db = JFactory::getDbo();
-		$db->setQuery('UPDATE `'.$prefix.'extensions` SET `enabled` = 1 where `name` = "plg_content_games"');
-		return (bool)$db->query();
-	}
 }

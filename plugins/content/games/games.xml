@@ -14,7 +14,8 @@
 	<files>
 		<filename plugin="games">games.php</filename>
 		<filename>index.html</filename>
-		<filename>form.xml</filename>
+		<filename>forms/form.xml</filename>
+		<filename>forms/index.html</filename>
 	</files>
 
 	<languages folder="language">

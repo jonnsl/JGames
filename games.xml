@@ -8,6 +8,8 @@
 	<version>1.0</version>
 	<creationDate>October 2010</creationDate>
 	<description>COM_GAMES_XML_DESCRIPTION</description>
+	
+	<scriptfile>script.games.php</scriptfile>
 
 	<install>
 		<sql>
@@ -37,6 +39,7 @@
 		<folder>css</folder>
 		<folder>images</folder>
 		<folder>js</folder>
+		<filename>index.html</filename>
 	</media>
 
 	<administration>
@@ -50,14 +53,12 @@
 		<files folder="administrator/components/com_games">
 			<folder>controllers</folder>
 			<folder>helpers</folder>
-			<folder>libraries</folder>
 			<folder>models</folder>
 			<folder>tables</folder>
 			<folder>views</folder>
 			<folder>sql</folder>
 			<filename>category.platforms.xml</filename>
 			<filename>games.php</filename>
-			<filename>loader.php</filename>
 			<filename>index.html</filename>
 		</files>
 
