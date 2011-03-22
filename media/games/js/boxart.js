@@ -2,14 +2,25 @@
 var Boxart = new Class({
 
 	boxarts: [],
+	
+	container: '',
+	
+	previousArrow: '',
+	
+	NextArrow: '',
 
 	params: {},
+	
+	saved: {},
 
 	initialize: function(params, saved){
 		this.params = new Hash(params);
 		this.saved = new Hash(saved);
+		this.container = document.id('boxarts');
+		this.previousArrow = document.id('previous');
+		this.NextArrow = document.id('next');
 		var cls = this;
-		this.platforms = document.getElementById('jform_platforms').getChildren();
+		this.platforms = document.id('jform_platforms').getChildren();
 		this.platforms.each(function(e, i){
 				e.addEvent('click', function(){
 					cls.platforms.each(function(p, k){
@@ -35,11 +46,12 @@ var Boxart = new Class({
 	},
 
 	centralizeArrows: function() {
-		var new_y = $('boxarts').getSize().y;
-		new_y = (new_y - 40)/2;
-		$('previous').setStyle('margin-top', new_y);
-		$('next').setStyle('margin-top', new_y);
+		var new_y = this.container.getSize().y;
+		new_y = new_y > 0 ? (new_y - 40)/2 : 0;
+		this.previousArrow.setStyle('margin-top', new_y);
+		this.NextArrow.setStyle('margin-top', new_y);
 	},
+
 	hasBoxart: function(id){
 		return this.boxarts.contains(id);
 	},
@@ -47,8 +59,8 @@ var Boxart = new Class({
 	addBoxart: function(id, name){
 		var params = this.params.get(id);
 		var value = this.saved.get(id);
-		var image = (value == '' || typeof value == 'object') ? params.default_boxart : value ;//a imagem sera o valor passado se o mesmo n„o estiver vazio
-		var image_thumb = image.replace(/(\.jpg)$/i, '_thumb$1');//a miniatura sera a imagem acrescida de _thumb antes da extens„o
+		var image = (value == '' || typeof value == 'object') ? params.default_boxart : value ;//a imagem sera o valor passado se o mesmo n√£o estiver vazio
+		var image_thumb = image.replace(/(\.jpg)$/i, '_thumb$1');//a miniatura sera a imagem acrescida de _thumb antes da extens√£o
 
 		// Create the elements
 		var div = new Element('div', {'class': 'boxart_holder', 'id': 'boxart_'+id});
