@@ -138,7 +138,7 @@ class GamesModelAjax extends JGModelList
 		
 		// Genres
 		$data['extension'] = 'com_games.genres';
-		$genres = array('Action', 'Adventure', 'Shooter', 'Strategy');
+		$genres = array('Action', 'Adventure', 'Strategy', 'RPG', 'Indie', 'Masively Multiplayer', 'Casual', 'Family Games', 'Simulation', 'Racing', 'Sports');
 		foreach($genres as $genre)
 		{
 			$table = JTable::getInstance('category');
