@@ -40,12 +40,12 @@ class GamesModelGame extends JGModelForm
 	 * @param	array	$data	The form data.
 	 * @return	boolean	True on success.
 	 */
-	public function save($data)
+	public function save(&$data)
 	{
 		// Initialise variables;
 		$dispatcher = JDispatcher::getInstance();
 		$table		= $this->getTable();
-		$pk			= (!empty($data['id'])) ? $data['id'] : (int)$this->getState($this->getName().'.id');
+		$pk			= (!empty($data['id'])) ? $data['id'] : 0;
 		$isNew		= true;
 
 		// Include the content plugins for the on save events.
@@ -65,9 +65,6 @@ class GamesModelGame extends JGModelForm
 			$this->setError($table->getError());
 			return false;
 		}
-
-		// Prepare the row for saving
-		//$this->prepareTable($table);
 
 		// Check the data.
 		if (!$table->check()) {
@@ -94,13 +91,6 @@ class GamesModelGame extends JGModelForm
 
 		// Trigger the onContentAfterSave event.
 		$dispatcher->trigger('onGameAfterSave', array($this->option.'.'.$this->name, $table, $isNew));
-
-		$pkName = $table->getKeyName();
-
-		if (isset($table->$pkName)) {
-			$this->setState($this->getName().'.id', $table->$pkName);
-		}
-		$this->setState($this->getName().'.new', $isNew);
 
 		return true;
 	}

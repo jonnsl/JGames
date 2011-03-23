@@ -288,8 +288,8 @@ abstract class JGModelForm extends JGModel
 		$context	= $this->option.'.edit.'.$this->getName();
 
 		// Get the data
-		$id = $app->getUserState($context.'.id', array());
-		$this->setState($this->getName().'.id', $id);
+		$pk = $app->getUserState($context.'.id', 0);
+		$this->setState($this->getName().'.id', $pk);
 		
 		$data = $app->getUserState($context.'.data', array());
 		$this->setState($this->getName().'.data', $data);

@@ -3,14 +3,8 @@
 	<fieldset>
 		<field
 			name="id"
-			type="text"
-			class="readonly"
-			label="JGLOBAL_FIELD_ID_LABEL"
-			description ="JGLOBAL_FIELD_ID_DESC"
-			size="10"
-			default="0"
-			required="true"
-			readonly="true"  />
+			type="hidden"
+			default="0" />
 
 		<field
 			name="title"

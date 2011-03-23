@@ -131,7 +131,6 @@ class JGControllerForm extends JGController
 		}
 
 		// Clear the record edit information from the session.
-		$app->setUserState($context.'.id', null);
 		$app->setUserState($context.'.data', null);
 
 		return $this->display();
@@ -198,16 +197,26 @@ class JGControllerForm extends JGController
 		$recordId	= JRequest::getInt($key);
 
 		// Attempt to check-in the current record.
-		if ($recordId && $checkin && $model->checkin($recordId) === false)
+		if ($recordId)
 		{
-			// Check-in failed, go back to the record and display a notice.
-			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError()));
-			$this->setMessage($this->getError(), 'error');
-			return $this->display();
+			// Check we are holding the id in the edit list.
+			if (!$this->checkEditId($context, $recordId)) {
+				// Somehow the person just went to the form - we don't allow that.
+				$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $recordId));
+				$this->setMessage($this->getError(), 'error');
+				$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&controller='.$this->controller_list, false));
+				return false;
+			}
+
+			if ($checkin && $model->checkin($recordId) === false) {
+				// Check-in failed, go back to the record and display a notice.
+				$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError()));
+				$this->setMessage($this->getError(), 'error');
+				return $this->display();
+			}
 		}
 
 		// Clean the session data and redirect.
-		$app->setUserState($context.'.id', null);
 		$app->setUserState($context.'.data', null);
 		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&controller='.$this->controller_list, false));
 
@@ -250,7 +259,8 @@ class JGControllerForm extends JGController
 			$this->setMessage($this->getError(), 'error');
 		}
 
-		// Push the new record id into the session.
+		// Check-out succeeded, push the new record id into the session.
+		$this->holdEditId($context, $recordId);
 		$app->setUserState($context.'.id', $recordId);
 		$app->setUserState($context.'.data', null);
 		return $this->display();
@@ -280,15 +290,26 @@ class JGControllerForm extends JGController
 
 		// Populate the row id from the session.
 		$data[$key] = $recordId;
+		
+		if (!$this->checkEditId($context, $recordId)) {
+			// Somehow the person just went to the form and saved it - we don't allow that.
+			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $recordId));
+			$this->setMessage($this->getError(), 'error');
+			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&controller='.$this->controller_list, false));
+
+			return false;
+		}
 
 		// The save2copy task needs to be handled slightly differently.
-		if ($task == 'save2copy')
+		if ($task == 'save2copy' && $recordId)
 		{
 			// Check-in the original row.
 			if ($checkin  && $model->checkin($data[$key]) === false) {
 				// Check-in failed, go back to the item and display a notice.
 				$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError()));
 				$this->setMessage($this->getError(), 'error');
+				// Set the record data in the session.
+				$app->setUserState($context.'.data', $data);
 				return $this->display();
 			}
 
@@ -371,23 +392,32 @@ class JGControllerForm extends JGController
 		switch ($task)
 		{
 			case 'save2copy':
+				// Release the old id and hold the new id
+				$this->releaseEditId($context, $recordId);
+				$this->holdEditId($context, $validData[$key]);
 				// Set the record data in the session.
-				$app->setUserState($context.'.data', null);
+				$app->setUserState($context.'.id', $validData[$key]);
+				$app->setUserState($context.'.data', $validData);
 				return $this->display();
+
 			case 'apply':
 				// Set the record data in the session.
 				$app->setUserState($context.'.id', $recordId);
-				$app->setUserState($context.'.data', null);
+				$app->setUserState($context.'.data', $validData);
 				return $this->display();
 
 			case 'save2new':
 				// Clear the record id and data from the session.
+				$this->releaseEditId($context, $recordId);
 				$app->setUserState($context.'.id', null);
 				$app->setUserState($context.'.data', null);
-				return $this->add();
+				// Redirect to the edit screen.
+				$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&controller='.$this->controller_item, false));
+				break;
 
 			default:
 				// Clear the record id and data from the session.
+				$this->releaseEditId($context, $recordId);
 				$app->setUserState($context.'.id', null);
 				$app->setUserState($context.'.data', null);
 
@@ -397,5 +427,68 @@ class JGControllerForm extends JGController
 		}
 
 		return $this;
+	}
+
+	/**
+	 * Method to check whether an ID is in the edit list.
+	 *
+	 * @param	string	$context	The context for the session storage.
+	 * @param	int		$id			The ID of the record to add to the edit list.
+	 * @return	void
+	 */
+	protected function releaseEditId($context, $id)
+	{
+		$app	= JFactory::getApplication();
+		$values = (array) $app->getUserState($context.'.id');
+
+		// Do a strict search of the edit list values.
+		$index = array_search((int) $id, $values, true);
+
+		if (is_int($index)) {
+			unset($values[$index]);
+			$app->setUserState($context.'.id', $values);
+		}
+	}
+
+	/**
+	 * Method to add a record ID to the edit list.
+	 *
+	 * @param	string	$context	The context for the session storage.
+	 * @param	int		$id			The ID of the record to add to the edit list.
+	 * @return	void
+	 */
+	protected function holdEditId($context, $id)
+	{
+		// Initialise variables.
+		$app	= JFactory::getApplication();
+		$values	= (array) $app->getUserState($context.'.id');
+
+		// Add the id to the list if non-zero.
+		if (!empty($id)) {
+			array_push($values, (int) $id);
+			$values = array_unique($values);
+			$app->setUserState($context.'.id', $values);
+		}
+	}
+
+	/**
+	 * Method to check whether an ID is in the edit list.
+	 *
+	 * @param	string	$context	The context for the session storage.
+	 * @param	int		$id			The ID of the record to add to the edit list.
+	 * @return	boolean	True if the ID is in the edit list.
+	 */
+	protected function checkEditId($context, $id)
+	{
+		if ($id) {
+			$app	= JFactory::getApplication();
+			$values = (array) $app->getUserState($context.'.id');
+
+			return in_array((int) $id, $values);
+		}
+		else {
+			// No id for a new item.
+			return true;
+		}
 	}
 }
