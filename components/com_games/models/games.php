@@ -31,6 +31,13 @@ class GamesModelGames extends JGModelList
 		}
 		$this->setState('params', $params);
 
+		$layout = JRequest::getcmd('layout', '');
+		$tmpl = JRequest::getcmd('tmpl', '');
+		$search = ($layout == 'modal' && $tmpl = 'component') ?
+			JRequest::getString('filter_search', '')
+			: false;
+		$this->setState('filter.search', $search);
+		
 		$serie = JRequest::getString('serie', '');
 		$this->setState('filter.serie', $serie);
 
@@ -147,6 +154,13 @@ class GamesModelGames extends JGModelList
 			$query->where('p.platform_id ='.$db->quote($platform));
 			//$platforms = array_map(array($db, 'quote'), $platforms);
 			//$query->where('p.platform_id IN ('.implode(',', $platforms).')');
+		}
+
+		// Filter by platform
+		$search = $this->getState('filter.search');
+		if ($search) {
+			$search = $db->Quote('%'.$db->getEscaped($search, true).'%', false);
+			$query->where('a.title LIKE '.$search);
 		}
 
 		// Group by id

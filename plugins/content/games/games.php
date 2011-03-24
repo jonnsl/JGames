@@ -42,7 +42,9 @@ class plgContentGames extends JPlugin
 
 	public function onContentBeforeSave($context, $table, $isNew)
 	{
-		if ($context != 'com_content.article' || !$this->enabled) return;
+		if ( !($context == 'com_content.article'
+			|| $context == 'com_content.form')
+			|| !$this->enabled) return;
 
 		$attribs = new JRegistry($table->attribs);
 		$attribs = $attribs->toArray();
@@ -59,7 +61,9 @@ class plgContentGames extends JPlugin
 
 	public function onContentAfterSave($context, $table, $isNew)
 	{
-		if ($context != 'com_content.article' || !$this->enabled) return;
+		if ( !($context == 'com_content.article'
+			|| $context == 'com_content.form')
+			|| !$this->enabled) return;
 
 		$db = JFactory::getDbo();
 
