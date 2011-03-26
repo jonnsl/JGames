@@ -25,7 +25,13 @@ class GamesViewGame extends JView
 		$this->state	= $this->get('State');
 		$this->params	= $this->state->params;
 		
-		//Escape strings for HTML output
+		// Add item to the breadcrumbs
+		JFactory::getApplication()
+			->getPathway()
+			->addItem($this->item->title, 'index.php?option=com_games&view=game&id='.$this->item->id.($this->state->get('filter.platform', 0) ? '&platform='.$this->state->get('filter.platform', 0): ''));
+		$this->document->setTitle($this->item->title);
+		
+		// Escape strings for HTML output
 		$this->pageclass_sfx = htmlspecialchars($this->params->get('pageclass_sfx'));
 
 		$this->_template = $this->loadTemplate($tpl);

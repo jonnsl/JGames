@@ -1,35 +1,67 @@
 #game_item {
-	overflow: hidden;
+	overflow: hidden
 }
-.info h1{
+#game_item .position-left{
+	float: left
+}
+
+#game_item .position-left .details{
+	margin-bottom: 0;
+	padding-left: 0;
+	list-style-position: inside;
+}
+
+#game_item .position-left .details li{
+	border-bottom: solid 1px #DDD
+}
+
+#game_item .position-left .details li a{
+	display: block;
+	padding: 8px;
+	text-decoration: none;
+}
+
+#game_item .position-left .game_menu{
+	margin-top: 0;
+	padding-left: 0;
+	list-style-position: inside;
+}
+#game_item .position-left .game_menu li {
+	border-bottom: solid 1px #DDD
+}
+
+#game_item .position-left .game_menu li a{
+	display: block;
+	padding: 8px;
+	text-decoration: none;
+}
+
+#game_item .position-right{
+	margin-left: 125px
+}
+
+.position-right h1{
 	margin: 0px 5px !important;
-	padding: 0px !important;
+	padding: 0px !important
 }
 
-.info{
-	margin-left: 120px;
-}
-.platforms{
+.position-right .platforms{
 	margin: 5px !important;
-	padding: 0px !important;
+	padding: 0px !important
 }
 
-.platforms .current{
-	font-weight: bold;
+.position-right .platforms .current{
+	font-weight: bold
 }
 
-.description{
+.position-right .description{
 	margin: 5px !important;
 	padding: 0px !important;
 	height: 107px;
 	overflow-y: scroll;
-	overflow-x:hidden;
-}
-
-.boxart{
-	float: left;
+	overflow-x:hidden
 }
 
 pre {
-	clear: both;
+	clear: both
 }

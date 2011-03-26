@@ -16,9 +16,9 @@ $game = $this->item;
 ?>
 <div id="game_item" class="<?php echo $this->pageclass_sfx;?>">
 
-	<div class="boxart">
+	<div class="position-left">
 		<?php echo JHtml::_('games.boxart', $game->title, $game->boxarts, $this->state->get('filter.platform', 0));?>
-		<ul>
+		<ul class="details">
 			<?php 
 				if (!empty($game->developer))	echo '<li><a href="'.JRoute::_('index.php?option=com_games&developer='.$game->developer).'" title="Developer">'.$game->developer.'</a></li>';
 				if (!empty($game->publisher))	echo '<li><a href="'.JRoute::_('index.php?option=com_games&publisher='.$game->publisher).'" title="Publisher">'.$game->publisher.'</a></li>';
@@ -26,8 +26,9 @@ $game = $this->item;
 				if (!empty($game->site))		echo '<li><a href="'.htmlspecialchars($game->site, ENT_COMPAT, 'UTF-8').'" title="'.htmlspecialchars($game->site, ENT_COMPAT, 'UTF-8').'" rel="external">Official Site</a></li>';
 			?>
 		</ul>
+		<jdoc:include type="modules" name="games-position-left" />
 	</div>
-	<div class="info">
+	<div class="position-right">
 		<h1><?php echo $game->title; ?></h1>
 		<div class="platforms">
 			<?php echo JHtml::_('games.platformsList', $game, $this->state->get('filter.platform', 0)); ?>
@@ -35,7 +36,7 @@ $game = $this->item;
 		<div class="description">
 			<?php echo $game->description; ?>
 		</div>
-		<jdoc:include type="modules" name="position-games-0" />
+		<jdoc:include type="modules" name="games-position-after-description" />
 	</div>
 	
 	

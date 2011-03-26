@@ -1,5 +1,6 @@
 #games, #gameslist, #filters{
-	float: left
+	float: left;
+	width: 100%
 }
 #filters {
 	border-bottom: 1px solid #ddd
