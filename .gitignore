@@ -12,6 +12,7 @@
 /templates
 /tmp
 /htaccess.txt
+/.htaccess
 /index.php
 /configuration.php
 /joomla.xml
