@@ -25,10 +25,7 @@ JHtml::_('script', 'games/gameslist.js', true, true);
 	<div class="clr"></div>
 
 	<div id="filters">
-		<form action="<?php echo JRoute::_('index.php?option=com_games&view=all');?>" id="filters_form">
-			<input type="hidden" name="option" value="com_games">
-			<input type="hidden" name="view" value="games">
-			<input type="hidden" name="Itemid" value="<?php echo JRequest::getInt('Itemid'); ?>">
+		<form action="<?php echo JRoute::_('index.php?option=com_games');?>" id="filters_form">
 			<select name="platform" class="inputbox">
 				<option value=""><?php echo JText::_('COM_GAMES_OPTION_SELECT_PLATFORM'); ?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_games.platforms'), 'value', 'text', $this->state->get('filter.platform'));?>
