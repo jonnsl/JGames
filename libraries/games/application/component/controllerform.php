@@ -131,6 +131,7 @@ class JGControllerForm extends JGController
 		}
 
 		// Clear the record edit information from the session.
+		$app->setUserState($context.'.id', null);
 		$app->setUserState($context.'.data', null);
 
 		return $this->display();
