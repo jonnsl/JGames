@@ -8,7 +8,7 @@
 #game_item .position-left .details{
 	margin-bottom: 0;
 	padding-left: 0;
-	list-style-position: inside;
+	list-style-position: inside
 }
 
 #game_item .position-left .details li{
@@ -18,22 +18,22 @@
 #game_item .position-left .details li a{
 	display: block;
 	padding: 8px;
-	text-decoration: none;
+	text-decoration: none
 }
 
 #game_item .position-left .game_menu{
 	margin-top: 0;
 	padding-left: 0;
-	list-style-position: inside;
+	list-style-position: inside
 }
 #game_item .position-left .game_menu li {
-	border-bottom: solid 1px #DDD
+	border-bottom: solid 1px #ddd
 }
 
 #game_item .position-left .game_menu li a{
 	display: block;
 	padding: 8px;
-	text-decoration: none;
+	text-decoration: none
 }
 
 #game_item .position-right{
@@ -59,7 +59,7 @@
 	padding: 0px !important;
 	height: 107px;
 	overflow-y: scroll;
-	overflow-x:hidden
+	overflow-x: hidden
 }
 
 pre {

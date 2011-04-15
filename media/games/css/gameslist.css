@@ -17,6 +17,11 @@
 	width: 120px;
 	height: 209px
 }
+#games a img, #games a img:hover
+{
+	border: none;
+	background: none;
+}
 
 #games .game .game-info{
 	width: 120px;
