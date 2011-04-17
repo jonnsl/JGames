@@ -60,11 +60,24 @@ class GamesModelGame extends JGModelForm
 		// Deal with boxarts
 		$this->boxart($data['boxarts'], $data['title']);
 
+		// Bind the Achievements
+		try
+		{
+			JGImport('steam.steam');
+			$steam  = new JGSteam;
+			$data['achievements'] = serialize($steam->getAchievements($data['title']));
+		}
+		catch(JException $e)
+		{
+			$data['achievements'] = '';
+		}
+
 		// Bind the data.
 		if (!$table->bind($data)) {
 			$this->setError($table->getError());
 			return false;
 		}
+		
 
 		// Check the data.
 		if (!$table->check()) {

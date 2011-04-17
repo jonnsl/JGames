@@ -34,13 +34,11 @@ class JGViewForm extends JGView
 		}
 	}
 	
-	public function display($tpl = null)
+	public function setUpData()
 	{
 		$this->item		= $this->get('Item');
 		$this->form		= $this->get('Form');
 		$this->state	= $this->get('State');
-
-		parent::display($tpl);
 	}
 
 	/**

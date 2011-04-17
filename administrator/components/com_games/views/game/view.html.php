@@ -17,11 +17,15 @@ JGImport('application.component.viewForm');
  */
 class GamesViewGame extends JGViewForm
 {
+	public function setUpData()
+	{
+		parent::setUpData();
+		$this->platformsParams = $this->get('PlatformsParams');
+	}
 
 	public function display($tpl = null)
 	{
-		$this->platformsParams	=  $this->get('PlatformsParams');
-
+		$this->setUpData();
 		$this->addSubmenu();
 		$this->addToolbar();
 		parent::display($tpl);

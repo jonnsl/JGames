@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS `#__games` (
   `pegi_content` varchar(255) NOT NULL default '',
   `checked_out` int(11) unsigned NOT NULL default '0',
   `checked_out_time` datetime NOT NULL default '0000-00-00 00:00:00',
+  `achievements` longtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 

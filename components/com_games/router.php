@@ -17,31 +17,39 @@ defined('_JEXEC') or die;
 function GamesBuildRoute(&$query)
 {
 	$segments = array();
-	if(isset($query['view']) && $query['view'] == 'game')
+	if(isset($query['view']) && isset($query['id']))
 	{
-		unset($query['view']);
-		if(isset($query['id']))
+		$db = JFactory::getDbo();
+		$dbquery = $db->getQuery(true)
+			->select('a.alias')
+			->from('#__games AS a')
+			->where('a.id = '.(int)$query['id']);
+		$db->setQuery($dbquery);
+		$segments[] = $db->loadResult();
+		unset($query['id']);
+
+		if(isset($query['platform']))
 		{
 			$db = JFactory::getDbo();
 			$dbquery = $db->getQuery(true)
 				->select('a.alias')
-				->from('#__games AS a')
-				->where('a.id = '.(int)$query['id']);
+				->from('#__categories AS a');
+			if($query['platform'] != 0) {
+				$dbquery->where('a.id = '.(int)$query['platform']);
+			} else {
+				$dbquery->where('a.extension = "com_games.platforms"')
+					->order('lft ASC');
+			}
 			$db->setQuery($dbquery);
 			$segments[] = $db->loadResult();
-			unset($query['id']);
-			if(isset($query['platform']))
-			{
-				$db = JFactory::getDbo();
-				$dbquery = $db->getQuery(true)
-					->select('a.alias')
-					->from('#__categories AS a')
-					->where('a.id = '.(int)$query['platform']);
-				$db->setQuery($dbquery);
-				$segments[] = $db->loadResult();
-				unset($query['platform']);
-			}
+			unset($query['platform']);
 		}
+		
+		if($query['view'] !== 'game')
+		{
+			$segments[] = $query['view'];
+		}
+		unset($query['view']);
 	}
 	//JError::raiseWarning(0, 'BuildRoute: <pre>'.print_r($query,1).'</pre>--------------------');
 	return $segments;
@@ -78,6 +86,16 @@ function GamesParseRoute($segments)
 			->where('a.alias = '.$db->quote($platform));
 		$db->setQuery($query);
 		$vars['platform'] = (int)$db->loadResult();
+	}
+	if (isset($segments[2]))
+	{
+		switch ($segments[2])
+		{
+			case 'achievements':
+				$vars['view'] = $segments[2];
+				break;
+		}
+		
 	}
 	//JError::raiseWarning(0, 'GamesParseRoute: <pre>'.print_r($segments,1).'</pre>');
 	return $vars;

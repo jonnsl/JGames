@@ -39,7 +39,7 @@ class GamesModelGame extends JGModel
 	public function getItem()
 	{
 		$query = $this->db->getQuery(true)
-			->select('a.*')
+			->select($this->getState('game.select', 'a.id, a.title, a.boxarts, a.description, a.developer, a.publisher, a.serie, a.site'))
 			->from('#__games as a')
 			->where('a.id = '.$this->getState('game.id'));
 		$this->db->setQuery($query);

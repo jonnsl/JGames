@@ -59,11 +59,14 @@ abstract class JHtmlGames
 	public function platformsList($game, $current = 0)
 	{
 		$platforms = $game->platforms;
+		$view = JRequest::getCmd('view');
+		$href = 'index.php?option=com_games&view=game&id='.$game->id;
+		if ($view !== 'game') $href .= '&view='.$view;
 		$html = array();
 		foreach ($platforms as $platform)
 		{
-			$href = JRoute::_('index.php?option=com_games&view=game&id='.$game->id.'&platform='.$platform->id);
-			$a = new JGXhtml('a', array('title' => htmlspecialchars($platform->title, ENT_COMPAT, 'UTF-8'), 'href' => $href));
+			$href .= '&platform='.$platform->id;
+			$a = new JGXhtml('a', array('title' => htmlspecialchars($platform->title, ENT_COMPAT, 'UTF-8'), 'href' => JRoute::_($href)));
 			if ($platform->id == $current) $a->addClass('current');
 			$a->setText($platform->title);
 			$html[] = (string)$a;

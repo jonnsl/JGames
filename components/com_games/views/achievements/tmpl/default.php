@@ -26,7 +26,6 @@ $game = $this->item;
 				if (!empty($game->site))		echo '<li><a href="'.htmlspecialchars($game->site, ENT_COMPAT, 'UTF-8').'" title="'.htmlspecialchars($game->site, ENT_COMPAT, 'UTF-8').'" rel="external">Official Site</a></li>';
 				echo '<li><a href="'.JRoute::_('index.php?option=com_games&view=achievements&id='.$game->id.'&platform='.$this->state->get('filter.platform', 0)).'" title="">Achievements</a></li>';
 			?>
-			
 		</ul>
 		<jdoc:include type="modules" name="games-position-left" />
 	</div>
@@ -35,14 +34,31 @@ $game = $this->item;
 		<div class="platforms">
 			<?php echo JHtml::_('games.platformsList', $game, $this->state->get('filter.platform', 0)); ?>
 		</div>
-		<div class="description">
-			<?php echo $game->description; ?>
+		<div id="achievements">
+			<?php
+			if (is_array($game->achievements))
+			{
+				foreach ($game->achievements as $achievement) : ?>
+				<div class="achievement">
+					<img src="<?php echo $this->escape($achievement['iconClosed']); ?>" alt="<?php echo $this->escape($achievement['name']); ?>" />
+					<div class="info">
+						<h3><?php echo $this->escape($achievement['name']); ?></h3>
+						<h5><?php echo $this->escape($achievement['description']); ?></h5>
+					</div>
+					<div class="clr"></div>
+				</div>
+			
+			<?php 
+				endforeach;
+			}
+			else
+			{
+				echo 'No Steam Achievements available.';
+			}
+			?>
 		</div>
-		<jdoc:include type="modules" name="games-position-after-description" />
 	</div>
-	
-	
-	
+
 </div>
 <pre>
 	<?php //echo htmlspecialchars(print_r($game, 1), ENT_COMPAT, 'UTF-8'); ?>

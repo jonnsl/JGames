@@ -19,6 +19,8 @@ class JGXhtml extends JObject
 	protected $inlineClose = array('area', 'base', 'basefront', 'br', 'col', 'hr', 'img', 'link', 'meta', 'param', 'input');
 
 	protected $attributes = array();
+	
+	protected $class = '';
 	/**
 	 *
 	 *
