@@ -56,8 +56,9 @@ class JGSteam extends JObject
 
 		try
 		{
-			$app = $this->getCommunityGameName($app);
-			$xml = $this->getData(STEAMWORKS_API_SERVER.'/'.$user.'/stats/'.$app.'/?xml=1');
+			$game = $this->getGame($app, $user);
+			$url = isset($game->statsLink) ? $game->statsLink.'/?xml=1' : STEAMWORKS_API_SERVER.'/'.$user.'/stats/appid/'.$game->appID.'/?xml=1';
+			$xml = $this->getData($url);
 			
 			// Check for an error
 			if(isset($xml->error))
@@ -76,65 +77,58 @@ class JGSteam extends JObject
 		return $achievements;
 	}
 	
+	public function getGame($app, $user)
+	{
+		$games = $this->getGames();
+		if (is_numeric($app) && isset($games[$app]))
+		{
+			return $games[$app];
+		}
+		else if (is_string($app))
+		{
+			foreach ($games as $game)
+			{
+				if (
+					(isset($game->name) && $game->name == $app) ||
+					(isset($game->communityGameName) && $game->communityGameName == $app)
+				) {
+					return $game;
+				}
+			}
+		}
+
+		throw new JException('Game not found.');
+	}
+	
 	public function getStats($CommunityGameName, $userId = 'ChetFaliszek')
 	{
 		// $url = STEAMWORKS_API_SERVER.'/'.$userId.'/stats/'.$CommunityGameName.'/?xml=1';
 	}
 	
-	public function getAppId($CommunityGameName)
+	public function getAppId($app)
 	{
-		$games = $this->getGames();
-		foreach($games as $appId => $info)
-		{
-			if(isset($info->communityGameName) && $info->communityGameName == $CommunityGameName)
-			{
-				return $appId;
-			}
-		}
-		throw new JException('Invalid CommunityGameName');
+		return $this->getGame($app, $user)->appID;
 	}
 	
-	public function getCommunityGameName($appId)
+	public function getCommunityGameName($app)
 	{
-		$games = $this->getGames();
-		if (is_numeric($appId))
-		{
-			if (isset($games[$appId]))
-			{
-				return $games[$appId]->communityGameName;
-			}
-			else
-			{
-				throw new JException('Invalid AppID');
-			}
-		}
-		else if (is_string($appId))
-		{
-			foreach($games as $info)
-			{
-				if(isset($info->name) && $info->name == $appId)
-				{
-					return $info->communityGameName;
-				}
-			}
-			throw new JException('Invalid CommunityGameName');
-		}
-		throw new JException('Invalid Arguments suplied to JGSteam::getCommunityGameName()');
+		return $this->getGame($app, $user)->communityGameName;
 	}
 	
 	private function getData($url)
 	{
-		JError::raiseWarning(0, $url);
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		
-		// grab URL and pass it to the browser
 		$res = curl_exec($ch);
-		
-		// close cURL resource, and free up system resources
 		curl_close($ch);
-		return simplexml_load_string($res);
+		
+		if(empty($res) || !$xml = simplexml_load_string($res))
+		{
+			throw new JException('Could not get the data.');
+		} else {
+			return $xml;
+		}
 	}
 }
