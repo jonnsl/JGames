@@ -48,7 +48,7 @@ abstract class JHtmlGames
 		
 		if ($link) {
 			JHtml::_('behavior.modal');
-			$a = new JGXhtml('a', array('title' => htmlspecialchars($alt, ENT_COMPAT, 'UTF-8'), 'href' => $src, 'class' => 'modal'));
+			$a = new JGXhtml('a', array('title' => htmlspecialchars($alt, ENT_COMPAT, 'UTF-8'), 'href' => $src, 'class' => 'modal boxart'));
 			$a->setHtml($img);
 			$html = $a;
 		}
