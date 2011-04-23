@@ -44,8 +44,8 @@
 					default="0">
 					<option value="0">JNONE</option>
 					<option value="steam">COM_GAMES_CATEGORY_OPTION_STEAM</option>
-					<option value="live">COM_GAMES_CATEGORY_OPTION_LIVE</option>
-					<option value="psn">COM_GAMES_CATEGORY_OPTION_PSN</option>
+					<!--<option value="live">COM_GAMES_CATEGORY_OPTION_LIVE</option>
+					<option value="psn">COM_GAMES_CATEGORY_OPTION_PSN</option>-->
 				</field>
 		</fieldset>
 	</fields>
