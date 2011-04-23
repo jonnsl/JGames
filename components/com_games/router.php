@@ -81,11 +81,16 @@ function GamesParseRoute($segments)
 		$platform = str_replace(':', '-',$segments[1]);
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true)
-			->select('a.id')
-			->from('#__categories AS a')
-			->where('a.alias = '.$db->quote($platform));
+			->select('pc.id')
+			->from('#__categories AS pc')
+			->leftjoin('#__games_platform_map AS p ON pc.id = p.platform_id')
+			->where('p.game_id = '.$vars['id'])
+			->where('pc.alias = '.$db->quote($platform));
 		$db->setQuery($query);
 		$vars['platform'] = (int)$db->loadResult();
+		if (!$vars['platform']) {
+			JError::raiseError(404, 'Game not avaiable on this platform');
+		}
 	}
 	if (isset($segments[2]))
 	{

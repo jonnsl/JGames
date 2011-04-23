@@ -60,12 +60,17 @@ abstract class JHtmlGames
 	{
 		$platforms = $game->platforms;
 		$view = JRequest::getCmd('view');
-		$href = 'index.php?option=com_games&view=game&id='.$game->id;
-		if ($view !== 'game') $href .= '&view='.$view;
+		$href = 'index.php?option=com_games&id='.$game->id;
+		
 		$html = array();
 		foreach ($platforms as $platform)
 		{
 			$href .= '&platform='.$platform->id;
+			if ($view == 'achievements' && $view_type = $platform->params->get('achievements_type', false)) {
+				$href .= '&view=achievements';
+			} else {
+				$href .= '&view=game';
+			}
 			$a = new JGXhtml('a', array('title' => htmlspecialchars($platform->title, ENT_COMPAT, 'UTF-8'), 'href' => JRoute::_($href)));
 			if ($platform->id == $current) $a->addClass('current');
 			$a->setText($platform->title);

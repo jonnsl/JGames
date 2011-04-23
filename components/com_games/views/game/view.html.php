@@ -23,7 +23,8 @@ class GamesViewGame extends JView
 	{
 		$this->item		= $this->get('Item');
 		$this->state	= $this->get('State');
-		$this->params	= $this->state->params;
+		$this->menu_params		= $this->state->{'params.menu'};
+		$this->platform_params	= $this->state->{'params.platform'};
 		
 		// Add item to the breadcrumbs
 		JFactory::getApplication()
@@ -32,7 +33,7 @@ class GamesViewGame extends JView
 		$this->document->setTitle($this->item->title);
 		
 		// Escape strings for HTML output
-		$this->pageclass_sfx = htmlspecialchars($this->params->get('pageclass_sfx'));
+		$this->pageclass_sfx = htmlspecialchars($this->menu_params->get('pageclass_sfx'));
 
 		$this->_template = $this->loadTemplate($tpl);
 

@@ -24,7 +24,7 @@ $game = $this->item;
 				if (!empty($game->publisher))	echo '<li><a href="'.JRoute::_('index.php?option=com_games&publisher='.$game->publisher).'" title="Publisher">'.$game->publisher.'</a></li>';
 				if (!empty($game->serie))		echo '<li><a href="'.JRoute::_('index.php?option=com_games&serie='.$game->serie).'" title="Serie">'.$game->serie.'</a></li>';
 				if (!empty($game->site))		echo '<li><a href="'.htmlspecialchars($game->site, ENT_COMPAT, 'UTF-8').'" title="'.htmlspecialchars($game->site, ENT_COMPAT, 'UTF-8').'" rel="external">Official Site</a></li>';
-				echo '<li><a href="'.JRoute::_('index.php?option=com_games&view=achievements&id='.$game->id.'&platform='.$this->state->get('filter.platform', 0)).'" title="">Achievements</a></li>';
+				if ($this->platform_params->get('achievements_type')) echo '<li><a href="'.JRoute::_('index.php?option=com_games&view=achievements&id='.$game->id.'&platform='.$this->state->get('filter.platform', 0)).'" title="">'.JText::_('ACHIEVEMENTS_TYPE_'.$this->platform_params->get('achievements_type')).'</a></li>';
 			?>
 		</ul>
 		<jdoc:include type="modules" name="games-position-left" />
@@ -36,25 +36,7 @@ $game = $this->item;
 		</div>
 		<div id="achievements">
 			<?php
-			if (is_array($game->achievements))
-			{
-				foreach ($game->achievements as $achievement) : ?>
-				<div class="achievement">
-					<img src="<?php echo $this->escape($achievement['iconClosed']); ?>" alt="<?php echo $this->escape($achievement['name']); ?>" />
-					<div class="info">
-						<h3><?php echo $this->escape($achievement['name']); ?></h3>
-						<h5><?php echo $this->escape($achievement['description']); ?></h5>
-					</div>
-					<div class="clr"></div>
-				</div>
-			
-			<?php 
-				endforeach;
-			}
-			else
-			{
-				echo 'No Steam Achievements available.';
-			}
+			echo $this->loadTemplate($this->platform_params->get('achievements_type'));
 			?>
 		</div>
 	</div>

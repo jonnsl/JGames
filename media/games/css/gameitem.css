@@ -67,7 +67,9 @@ pre {
 #achievements .achievement img
 {
 	float: left;
-	margin-right: 8px
+	margin-right: 8px;
+	width: 66px;
+	height: 66px
 } 
 #achievements .achievement .info
 {
