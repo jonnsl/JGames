@@ -9,7 +9,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
-JGImport('html.xhtml');
+JGImport('element.element', false);
 
 /**
  * Utility class for games
@@ -43,13 +43,13 @@ abstract class JHtmlGames
 		}
 		
 		$src_thumb = preg_replace('/(\.jpg)$/i', '_thumb$1', $src);
-		$img = new JGXhtml('img', array('alt' => htmlspecialchars($alt, ENT_COMPAT, 'UTF-8'), 'src' => $src_thumb));
+		$img = new Element('img', array('alt' => htmlspecialchars($alt, ENT_COMPAT, 'UTF-8'), 'src' => $src_thumb));
 		$html = $img;
 		
 		if ($link) {
 			JHtml::_('behavior.modal');
-			$a = new JGXhtml('a', array('title' => htmlspecialchars($alt, ENT_COMPAT, 'UTF-8'), 'href' => $src, 'class' => 'modal boxart'));
-			$a->setHtml($img);
+			$a = new Element('a', array('title' => htmlspecialchars($alt, ENT_COMPAT, 'UTF-8'), 'href' => $src, 'class' => 'modal boxart'));
+			$a->grab($img);
 			$html = $a;
 		}
 		
@@ -71,7 +71,7 @@ abstract class JHtmlGames
 			} else {
 				$href .= '&view=game';
 			}
-			$a = new JGXhtml('a', array('title' => htmlspecialchars($platform->title, ENT_COMPAT, 'UTF-8'), 'href' => JRoute::_($href)));
+			$a = new Element('a', array('title' => htmlspecialchars($platform->title, ENT_COMPAT, 'UTF-8'), 'href' => JRoute::_($href)));
 			if ($platform->id == $current) $a->addClass('current');
 			$a->setText($platform->title);
 			$html[] = (string)$a;

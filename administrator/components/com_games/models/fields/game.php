@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.form.formfield');
-JGImport('html.xhtml');
+JGImport('element.element', false);
 
 class JFormFieldGame extends JFormField
 {
@@ -39,20 +39,20 @@ class JFormFieldGame extends JFormField
 		$link = 'index.php?option=com_games&amp;view=games&amp;layout=modal&amp;tmpl=component&amp;field='.$this->id;
 
 		// Create a dummy text field with the game name.
-		$div	= new JGXhtml('div', array('class' => 'fltlft'));
-		$input	= new JGXhtml('input', array('type' => 'text','id' => $this->id.'_name', 'name' => $this->name.'[name]','value' => $this->value['name'], 'disabled' => true));
-		$div->setHtml($input);
+		$div	= new Element('div', array('class' => 'fltlft'));
+		$input	= new Element('input', array('type' => 'text','id' => $this->id.'_name', 'name' => $this->name.'[name]','value' => $this->value['name'], 'disabled' => true));
+		$div->grab($input);
 		
 		$html[] = (string)$div;
 
 
 		// Create the game select button.
-		$div2	= new JGXhtml('div', array('class' => 'button2-left'));
-		$div3	= new JGXhtml('div', array('class' => 'blank'));
-		$a		= new JGXhtml('a', array('class' => 'modal_'.$this->id, 'title' => JText::_('JLIB_FORM_CHANGE_USER'), 'href' => $link, 'rel' => "{handler: 'iframe', size: {x: 1000, y: 500}}"));
+		$div2	= new Element('div', array('class' => 'button2-left'));
+		$div3	= new Element('div', array('class' => 'blank'));
+		$a		= new Element('a', array('class' => 'modal_'.$this->id, 'title' => JText::_('JLIB_FORM_CHANGE_USER'), 'href' => $link, 'rel' => "{handler: 'iframe', size: {x: 1000, y: 500}}"));
 		$a->setText(JText::_('PLG_CONTENT_GAMES_SELECT_GAME'));
-		$div3->setHtml($a);
-		$div2->setHtml($div3);
+		$div3->grab($a);
+		$div2->grab($div3);
 		$html[] = (string)$div2;
 
 		// Create the real field, hidden, that stored the user id.

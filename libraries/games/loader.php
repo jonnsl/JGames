@@ -9,14 +9,14 @@
 // No direct access
 defined('_JEXEC') or die;
 
-function JGImport($filePath, $base = null, $key = 'libraries.games.')
+function JGImport($filePath, $prefix = true)
 {
 	static $paths;
 	$keyPath = 'libraries.'.$filePath;
 
 	if (!isset($paths[$keyPath]))
 	{
-		$base	= is_null($base) ? JPATH_LIBRARIES.'/games/' : $base;
+		$base	= JPATH_LIBRARIES.'/games/';
 		$parts	= explode('.', $filePath);
 
 		$className = array_pop($parts);
@@ -33,7 +33,7 @@ function JGImport($filePath, $base = null, $key = 'libraries.games.')
 		$path = str_replace('.', DS, $filePath);
 
 		// we are loading a JGames class prepend the classname with a capital JG.
-		$className = 'JG'.$className;
+		if ($prefix) $className = 'JG'.$className;
 		$classes = JLoader::register($className, $base.$path.'.php');
 		$rs = isset($classes[strtolower($className)]);
 
