@@ -12,7 +12,8 @@
 	<files>
 		<folder>application</folder>
 		<folder>database</folder>
-		<folder>html</folder>
+		<folder>element</folder>
+		<folder>steam</folder>
 		<folder>toolbar</folder>
 		<folder>utilities</folder>
 		<file>index.html</file>
