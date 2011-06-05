@@ -9,6 +9,11 @@
 // No direct access
 defined('_JEXEC') or die;
 
+// Check Plugin.
+if (!JPluginHelper::isEnabled('system', 'games')) {
+	return JError::raiseWarning(404, JText::_('COM_GAMES_ERROR_PLUGIN_SYSTEM_DISABLED'));
+}
+
 // Include dependencies
 JGImport('application.component.controller');
 
