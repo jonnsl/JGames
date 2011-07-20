@@ -48,7 +48,7 @@ class JGViewForm extends JGView
 	{
 		JGImport('toolbar.helper');
 		JToolBar::getInstance('toolbar')->addButtonPath(JPATH_LIBRARIES.'/games/toolbar/button');
-		JHtml::_('script', 'games/toolbar.js', false, true);
+		JHtml::_('script', 'games/toolbar.js', true, true);
 		JRequest::setVar('hidemainmenu', true);
 
 		$isNew = ($this->item->id == 0);

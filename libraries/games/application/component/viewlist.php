@@ -78,7 +78,7 @@ class JGViewList extends JGView
 	{
 		JGImport('toolbar.helper');
 		JToolBar::getInstance('toolbar')->addButtonPath(JPATH_LIBRARIES.'/games/toolbar/button');
-		JHtml::_('script', 'games/toolbar.js', false, true);
+		JHtml::_('script', 'games/toolbar.js', true, true);
 		JToolBarHelper::title(JText::_($this->_option.'_'.$this->getName()), $this->getName());
 
 		JGToolBarHelper::addNew($this->_controller_item);
