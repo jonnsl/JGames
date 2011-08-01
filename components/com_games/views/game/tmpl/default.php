@@ -44,6 +44,3 @@ $game = $this->item;
 	
 	
 </div>
-<pre>
-	<?php //echo htmlspecialchars(print_r($game, 1), ENT_COMPAT, 'UTF-8'); ?>
-</pre>
