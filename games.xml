@@ -73,6 +73,7 @@
 		<table>#__games</table>
 		<table>#__games_genre_map</table>
 		<table>#__games_platform_map</table>
+		<table>#__games_content</table>
 	</tables>
 
 	<dependencies>

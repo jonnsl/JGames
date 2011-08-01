@@ -28,3 +28,8 @@ CREATE TABLE IF NOT EXISTS `#__games_platform_map` (
   `game_id` integer NOT NULL,
   `platform_id` int(11) NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `#__games_content` (
+  `content_id` integer unsigned NOT NULL,
+  `game_id` integer NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
