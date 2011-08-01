@@ -19,9 +19,15 @@ JHtml::_('script', 'games/meio.autocomplete.js', false, true);
 JHtml::_('stylesheet', 'games/meio.autocomplete.css', array(), true);
 JHtml::_('script', 'games/addgame.js', false, true);
 JHtml::_('stylesheet', 'games/addgame.css', array(), true);
+JHtml::_('script', 'games/chosen.js', false, true);
+JHtml::_('stylesheet', 'games/chosen.css', array(), true);
 ?>
 
 <script type="text/javascript">
+window.addEvent('domready', function(){
+	new Chosen(document.id('jform_platforms'));
+	new Chosen(document.id('jform_genres'));
+})
 <!--
 Joomla.submitbutton = function(task)
 {

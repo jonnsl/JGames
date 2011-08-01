@@ -40,10 +40,7 @@
 			default="0"
 			class="inputbox"
 			multiple="true"
-			required="true" >
-			<option
-				value="0">COM_GAMES_OPTION_NO_GENRE</option>
-		</field>
+			required="true" />
 
 		<field
 			name="platforms"
@@ -54,10 +51,7 @@
 			default="0"
 			class="inputbox"
 			multiple="true"
-			required="true" >
-			<option
-				value="0">COM_GAMES_OPTION_NO_PLATFORM</option>
-		</field>
+			required="true" />
 
 		<field name="boxarts"/>
 

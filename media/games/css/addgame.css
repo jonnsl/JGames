@@ -68,3 +68,6 @@ div#boxarts div.inner {
 div#esrbrating a img {
 	float:left;
 }
+.adminform select {
+	width: 300px
+}

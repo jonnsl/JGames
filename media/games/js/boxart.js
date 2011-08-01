@@ -19,30 +19,23 @@ var Boxart = new Class({
 		this.container = document.id('boxarts');
 		this.previousArrow = document.id('previous');
 		this.NextArrow = document.id('next');
-		var cls = this;
-		this.platforms = document.id('jform_platforms').getChildren();
-		this.platforms.each(function(e, i){
-				e.addEvent('click', function(){
-					cls.platforms.each(function(p, k){
-						cls.updateBoxarts();
-					});
-				});
-		});
-		cls.updateBoxarts();
+		this.select = document.id('jform_platforms');
+		this.platforms = this.select.getChildren();
+		this.select.addEvent('change', this.updateBoxarts.bind(this));
+		this.updateBoxarts();
 		this.modal = SqueezeBox.initialize();
 	},
 
 	updateBoxarts: function() {
-		var cls = this;
-		cls.platforms.each(function(e, i){
-			if(e.selected && !cls.hasBoxart(e.value)) {
-				if(e.value != 0)cls.addBoxart(e.value, e.innerHTML);
+		this.platforms.each(function(e, i){
+			if (e.selected && !this.hasBoxart(e.value)) {
+				if (e.value != 0) this.addBoxart(e.value, e.get('html'));
 			}
-			if(!e.selected && cls.hasBoxart(e.value)) {
-				if(e.value != 0)cls.removeBoxart(e.value);
+			if (!e.selected && this.hasBoxart(e.value)) {
+				if (e.value != 0) this.removeBoxart(e.value);
 			}
-			cls.centralizeArrows();
-		});
+			this.centralizeArrows();
+		}, this);
 	},
 
 	centralizeArrows: function() {
@@ -88,7 +81,7 @@ var Boxart = new Class({
 		$('boxarts').getParent('div').setStyle('height', '100%');
 
 		// FIX for the carousel
-		horizontal = new Fx.Scroll.Carousel('boxarts',{
+		new Fx.Scroll.Carousel('boxarts',{
 			mode: 'horizontal',
 			loopOnScrollEnd: true
 		});
@@ -98,8 +91,7 @@ var Boxart = new Class({
 	},
 
 	removeBoxart: function(id){
-		var cls = this;
-		$('boxart_'+id).nix({duration: 1000, onComplete:function(){cls.centralizeArrows();}}, true);
+		$('boxart_'+id).nix({duration: 1000, onComplete:function(){this.centralizeArrows();}.bind(this)}, true);
 		this.boxarts.erase(id);
 	}
 });
