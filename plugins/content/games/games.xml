@@ -6,7 +6,7 @@
 	<copyright>(C) 2011 Copyleft - all rights reversed</copyright>
 	<license>GNU General Public License version 3</license>
 	<creationDate>July 2010</creationDate>
-	<version>Alpha 1</version>
+	<version>1.0.2</version>
 	<description>PLG_CONTENT_GAMES_XML_DESCRIPTION</description>
 
 	<scriptfile>installer.script.php</scriptfile>
