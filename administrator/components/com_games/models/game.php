@@ -63,12 +63,14 @@ class GamesModelGame extends JGModelForm
 		// Bind the Achievements
 		try
 		{
-			JGImport('steam.steam');
-			$steam  = new JGSteam;
-			$data['achievements'] = serialize($steam->getAchievements($data['title']));
+			require_once JPATH_LIBRARIES.'/games/steam-condenser/steam-condenser.php';
+			$id = new SteamId('ChetFaliszek');
+			$stats = $id->getGameStats($data['title']);
+			$achievements = serialize($stats->getAchievements());
 		}
-		catch(JException $e)
+		catch(Exception $e)
 		{
+			JError::raiseNotice(0, 'Could not get Achiements from STEAM: '.$e->getMessage());
 			$data['achievements'] = '';
 		}
 
