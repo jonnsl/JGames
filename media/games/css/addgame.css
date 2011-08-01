@@ -71,3 +71,7 @@ div#esrbrating a img {
 .adminform select {
 	width: 300px
 }
+.chzn-container {
+	float: left;
+	margin: 3px 0;
+}
