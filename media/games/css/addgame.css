@@ -44,7 +44,7 @@
 	font-size: 13px;
 }
 
-div#boxarts {
+#boxarts {
 	float: left;
 	overflow: hidden;
 	width: 435px;
@@ -61,10 +61,11 @@ div#boxarts {
 	margin-left: 0px;
 }
 
-div#boxarts div.inner {
+#boxarts div.inner {
 	width: 3780px;
+	overflow: hidden;
 }
 
-div#esrbrating a img {
+#esrbrating a img {
 	float:left;
 }
