@@ -3,22 +3,6 @@ var horizontal;
 window.addEvent('domready',function(){
 
 	/*
-	 * Carousel for boxarts panel
-	 */
-	horizontal = new Fx.Scroll.Carousel('boxarts',{
-		mode: 'horizontal',
-		loopOnScrollEnd: false
-	});
-
-	$('next').addEvent('click', function(){
-		horizontal.toNext();
-	});
-
-	$('previous').addEvent('click', function(){
-		horizontal.toPrevious();
-	});
-
-	/*
 	 * Auto complete
 	 */
 	new Meio.Autocomplete($('jform_developer'),	'index.php?option=com_games&controller=ajax&w=developer&format=json');
