@@ -108,7 +108,6 @@ window.addEvent('domready',function(){
 		<?php echo JHtml::_('sliders.panel',JText::_('COM_GAMES_FIELDSET_ESRB'), 'fieldset_esrb'); ?>
 		<fieldset class="panelform">
 			<div id="esrb">
-				<!-- <div id="search_esrb">Auto Search</div> -->
 				<?php echo $this->form->getLabel('esrb_rating'); ?>
 				<div class="clr"></div>
 				<?php $this->form->getInput('esrb_rating'); ?>
