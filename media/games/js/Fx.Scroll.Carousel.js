@@ -48,7 +48,14 @@ Fx.Scroll.Carousel = new Class({
 		this.elements = els;
 		return this;
 	},
-	
+
+	toFirst: function(){
+		if(this.checkLink()) return this;
+		this.currentIndex = 0;
+		this.toElement(this.elements[this.currentIndex]);
+		return this;
+	},
+
 	toNext: function(){
 		if(this.checkLink()) return this;
 		this.currentIndex = this.getNextIndex();
