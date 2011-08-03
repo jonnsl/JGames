@@ -1,24 +1,24 @@
 .rating a img , #pegi #content a img{
 	margin: 4px;
-	float:none;
+	float: none
 }
 
 .rating a input, #pegi #content input {
-	display: none;
+	display: none
 }
 
 .rating a img:hover, #pegi #content a img:hover {
 	border: #FF6000 solid 2px;
-	margin: 2px;
+	margin: 2px
 }
 
 .rating a.selected img, #pegi #content a.selected img{
 	border: #1874CD solid 2px;
-	margin: 2px;
+	margin: 2px
 }
 
 .rating p, #esrb p{
-	margin: 15px 0px 0px 0px;
+	margin: 15px 0 0 0
 }
 
 .boxart_holder {
@@ -31,17 +31,17 @@
 }
 
 .boxart_holder img {
-	padding: 0px;
-	margin: 0px;
+	padding: 0;
+	margin: 0;
 	width: 100%
 }
 
 .boxart_holder a {
 	display: block;
-	margin: 0px;
+	margin: 0;
 	text-align: center;
 	color: #025A8D;
-	font-size: 13px;
+	font-size: 13px
 }
 
 #boxarts {
@@ -49,23 +49,23 @@
 	overflow: hidden;
 	width: 435px;
 	border-top: 0;
-	height: 100%;
+	height: 100%
 }
 
 #previous,#next {
 	cursor: pointer;
 	float: left;
 	margin-top: 56px;
-	margin-bottom: 0px;
-	margin-right: 0px;
-	margin-left: 0px;
+	margin-bottom: 0;
+	margin-right: 0;
+	margin-left: 0
 }
 
 #boxarts div.inner {
 	width: 3780px;
-	overflow: hidden;
+	overflow: hidden
 }
 
 #esrbrating a img {
-	float:left;
+	float:left
 }

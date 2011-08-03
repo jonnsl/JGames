@@ -1,4 +1,3 @@
-
 var Boxart = new Class({
 
 	boxarts: [],

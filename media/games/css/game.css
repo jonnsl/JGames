@@ -1,0 +1,92 @@
+#game_item {
+	overflow: hidden
+}
+#game_item .position-left{
+	float: left
+}
+#game_item .position-left a.boxart, #game_item .position-left a.boxart:hover{
+	background: none !important
+}
+#game_item .position-left .details{
+	margin-bottom: 0;
+	padding-left: 0;
+	list-style-position: outside
+}
+
+#game_item .position-left .details li{
+	border-bottom: solid 1px #DDD
+}
+
+#game_item .position-left .details li a{
+	display: block;
+	padding: 8px;
+	text-decoration: none
+}
+
+#game_item .position-right{
+	margin-left: 125px
+}
+
+.position-right h1{
+	margin: 0px 5px !important;
+	padding: 0px !important
+}
+
+.position-right .platforms{
+	margin: 5px !important;
+	padding: 0px !important
+}
+
+.position-right .platforms .current{
+	font-weight: bold
+}
+
+.position-right .description{
+	margin: 5px !important;
+	padding: 0px !important;
+	height: 107px;
+	overflow-y: scroll;
+	overflow-x: hidden
+}
+
+pre {
+	clear: both
+}
+#achievements
+{
+	overflow: hidden;
+	margin: 16px
+}
+#achievements .achievement
+{
+	overflow: hidden;
+	margin-bottom: 8px
+}
+#achievements .achievement img
+{
+	float: left;
+	margin-right: 8px;
+	width: 66px;
+	height: 66px
+} 
+#achievements .achievement .info
+{
+	float: left;
+	padding: 8px;
+	height: 48px;
+	width: 80%;
+	background: #262627;
+	border: solid 1px #454545;
+	border-radius: 5px
+}
+#achievements .achievement h5
+{
+	color: #898989;
+	font-weight: normal
+}
+#achievements .achievement h3
+{
+	margin: 0;
+	color: #E1E1E1;
+	font-weight: bold
+}

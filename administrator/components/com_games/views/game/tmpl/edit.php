@@ -15,10 +15,19 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.framework', true);
-JHtml::_('script', 'games/meio.autocomplete.js', false, true);
-JHtml::_('stylesheet', 'games/meio.autocomplete.css', array(), true);
-JHtml::_('script', 'games/addgame.js', false, true);
-JHtml::_('stylesheet', 'games/addgame.css', array(), true);
+JHtml::_('script', 'system/modal.js', true, true);
+JHtml::_('stylesheet', 'system/modal.css', array(), true);
+if (JDEBUG) {
+	JHtml::_('script', 'games/admin/game.js', false, true, false, false);
+	JHtml::_('script', 'games/admin/game-autocomplete.js', false, true, false, false);
+	JHtml::_('script', 'games/admin/game-boxart.js', false, true, false, false);
+	JHtml::_('script', 'games/admin/game-carousel.js', false, true, false, false);
+	JHtml::_('stylesheet', 'games/admin/game.css', array(), true);
+	JHtml::_('stylesheet', 'games/admin/game-autocomplete.css', array(), true);
+} else {
+	JHtml::_('script', 'games/admin/game.min.js', false, true, false, false);
+	JHtml::_('stylesheet', 'games/admin/game.min.css', array(), true);
+}
 ?>
 
 <script type="text/javascript">
@@ -77,7 +86,11 @@ window.addEvent('domready',function(){
 
 		<?php echo JHtml::_('sliders.panel',JText::_('COM_GAMES_FIELDSET_BOXART'), 'fieldset_boxart'); ?>
 		<fieldset class="panelform">
-			<?php echo $this->loadTemplate('boxart'); ?>
+			<img src="../media/games/images/button_prev.png" alt="Previous" id="previous"/>
+			<div id="boxarts" class="carousel">
+				<div id="boxarts_inner" class="inner"></div>
+			</div>
+			<img src="../media/games/images/button_next.png" alt="Next" id="next"/>
 		</fieldset>
 
 		<?php echo JHtml::_('sliders.panel',JText::_('COM_GAMES_FIELDSET_DETAILS'), 'fieldset_details'); ?>

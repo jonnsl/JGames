@@ -10,8 +10,8 @@
 defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'helpers'.DS.'html');
-JHtml::_('stylesheet', 'games/gameslist.css', array(), true);
-JHtml::_('script', 'games/gameslist.js', true, true);
+JHtml::_('stylesheet', 'games/games'.(JDEBUG ? '' : '.min').'.css', array(), true);
+JHtml::_('script', 'games/games'.(JDEBUG ? '' : '.min').'.js', true, true);
 JHtml::_('script', 'games/modal_game_view.js', true, true);
 
 ?>

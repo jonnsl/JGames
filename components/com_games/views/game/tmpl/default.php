@@ -10,8 +10,7 @@
 defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
-JHtml::_('stylesheet', 'games/gameitem.css', array(), true);
-JHtml::_('script', 'games/gameitem.js', true, true);
+JHtml::_('stylesheet', 'games/game'.(JDEBUG ? '' : '.min').'.css', array(), true);
 $game = $this->item;
 ?>
 <div id="game_item" class="<?php echo $this->pageclass_sfx;?>">
