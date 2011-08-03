@@ -157,7 +157,8 @@ class JGController extends JObject
 		// Get the environment configuration.
 		$basePath	= isset($config['base_path']) ? $config['base_path'] : JPATH_COMPONENT;
 		$format		= JRequest::getWord('format');
-		$controller	= JRequest::getCmd('controller', $controller ? $controller : $prefix);
+		$controller	= JRequest::getCmd('controller');
+		$controller	= !empty($controller) ? $controller : $prefix;
 
 		// Define the controller filename and path.
 		$file	= self::createFileName('controller', array('name' => $controller, 'format' => $format));
