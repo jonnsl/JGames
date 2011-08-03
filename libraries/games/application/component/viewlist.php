@@ -73,35 +73,4 @@ class JGViewList extends JGView
 
 		parent::display($tpl);
 	}
-
-	protected function addToolbar()
-	{
-		JGImport('toolbar.helper');
-		JToolBar::getInstance('toolbar')->addButtonPath(JPATH_LIBRARIES.'/games/toolbar/button');
-		JHtml::_('behavior.framework', true);
-		JHtml::_('script', 'games/toolbar.js', false, true);
-		JToolBarHelper::title(JText::_($this->_option.'_'.$this->getName()), $this->getName());
-
-		JGToolBarHelper::addNew($this->_controller_item);
-		JGToolBarHelper::edit($this->_controller_item);
-
-		JToolBarHelper::divider();
-		JGToolBarHelper::publish($this->_controller_list);
-		JGToolBarHelper::unpublish($this->_controller_list);
-
-		JToolBarHelper::divider();
-		JGToolBarHelper::archive($this->_controller_list);
-		//if($this->state->get('filter.state') == -2){
-			JGToolBarHelper::delete($this->_controller_list);
-		/*}
-		else {
-			JGToolBarHelper::trash('games');
-		}*/
-
-		JToolBarHelper::divider();
-		JToolBarHelper::preferences($this->_option);
-
-		JToolBarHelper::divider();
-		JToolBarHelper::help(''/*'JHELP_CONTENT_ARTICLE_MANAGER'*/);
-	}
 }

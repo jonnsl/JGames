@@ -29,4 +29,19 @@ class GamesViewGames extends JGViewList
 		$this->addSubmenu();
 		parent::display($tpl);
 	}
+
+	protected function addToolbar()
+	{
+		JGImport('toolbar.helper');
+		JToolBar::getInstance('toolbar')->addButtonPath(JPATH_LIBRARIES.'/games/toolbar/button');
+		JHtml::_('behavior.framework', true);
+		JHtml::_('script', 'games/toolbar.js', false, true);
+		JToolBarHelper::title(JText::_('COM_GAMES_GAMES'), 'games');
+
+		JGToolBarHelper::addNew('game');
+		JGToolBarHelper::edit('game');
+
+		JToolBarHelper::divider();
+		JGToolBarHelper::delete('games');
+	}
 }
