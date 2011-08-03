@@ -85,7 +85,7 @@ class JButtonStandard extends JObject
 	{
 		$class	= $this->fetchIconClass($name);
 
-		$html	 = '<a href="#" class="toolbar" rel="{\'task\':\''.$task.'\', \'controller\':\''.$controller.'\'}">';
+		$html	 = '<a href="#" class="toolbar" data-task="'.$task.'" data-controller="'.$controller.'">';
 		$html	.= '<span class="'.$class.'"></span>';
 		$html	.= JText::_($text);
 		$html	.= '</a>';
