@@ -138,7 +138,7 @@ class GamesModelGame extends JGModelForm
 		if(empty($data))return true;
 		// Verifica se as plataformas existem e pega os parametros
 		$platformsIds = array_keys($data);
-		//$platformsIds = JArrayHelper::toInteger($platformsIds);
+		JArrayHelper::toInteger($platformsIds);
 		$query = $this->db->getQuery(true);
 		$query->select('c.params, c.alias, c.id, c.title');
 		$query->from('#__categories as c');
