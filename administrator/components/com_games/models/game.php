@@ -197,7 +197,7 @@ class GamesModelGame extends JGModelForm
 					$relative_path = preg_replace('@[^\\\]*(\.png|\.gif|\.jpg|\.bmp|\.jpeg|\.psd|\.eps)$@i', $title.'$1', $relative_path);
 				}
 
-				if(!$this->createBoxartThumb($full_path, (int)$platform['params']->get('width', 120), (int)$platform['params']->get('height', 165))){
+				if(!$this->createBoxartThumb($full_path, (int)$platform['params']->get('width'), (int)$platform['params']->get('height'))){
 					JError::raiseNotice(0, 'Could not create the boxart thumbnail for the platform:"'.$platform['title'].'"');
 				}
 
@@ -214,6 +214,17 @@ class GamesModelGame extends JGModelForm
 
 	protected function createBoxartThumb($file, $thumb_width, $thumb_height)
 	{
+		if(!$size = getimagesize($file)) return false;
+		list($width, $height) = $size;
+
+		if (!$thumb_width && !$thumb_height){
+			return false;
+		} else if (!$thumb_height) {
+			$thumb_height = ($height * $thumb_width) / $width;
+		} else if (!$thumb_width){
+			$thumb_width = ($width * $thumb_height) / $height;
+		}
+
 		$new_file = preg_replace('/(\.jpg)$/i', '_thumb$1', $file);
 
 		// Don't make unecessary work if the thumbnail already exists and has the right size
@@ -221,9 +232,6 @@ class GamesModelGame extends JGModelForm
 			list($old_file_width,$old_file_height) = getimagesize($new_file);
 			if($old_file_width== $thumb_width && $old_file_height==  $thumb_height)return true;
 		}
-
-		if(!$size = getimagesize($file)) return false;
-		list($width, $height) = $size;
 
 		if(
 			!($image_p = imagecreatetruecolor($thumb_width, $thumb_height)) ||

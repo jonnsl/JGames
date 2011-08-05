@@ -70,7 +70,7 @@ var Boxart = new Class({
 		var div = new Element('div', {'class': 'boxart_holder', 'id': 'boxart_'+id});
 		var aimg = new Element('a', {'href' : '../'+image}).inject(div);
 		SqueezeBox.assign(aimg);
-		var img = new Element('img', {'alt': name, 'src': '../'+image_thumb, 'width': params.width, 'height': params.height}).inject(aimg);
+		var img = new Element('img', {'alt': name, 'src': '../'+image_thumb, 'width': params.width || null, 'height': params.height || null}).inject(aimg);
 		var div2 = new Element('div', {'class': 'clr'}).inject(div);
 		var input = new Element('input', {'type':'hidden', 'id':'jform_boxart_path_'+id, 'value':value, 'name':'jform[boxarts]['+id+']'}).inject(div);
 		var a  = new Element('a', {

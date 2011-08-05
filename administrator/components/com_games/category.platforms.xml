@@ -10,18 +10,14 @@
 					type="text"
 					label="COM_GAMES_CATEGORY_FIELD_WIDTH_LABEL"
 					description="COM_GAMES_CATEGORY_FIELD_WIDTH_DESC"
-					required="true"
-					validate="positive"
-					default="120" />
+					validate="positive" />
 
 				<field
 					name="height"
 					type="text"
 					label="COM_GAMES_CATEGORY_FIELD_HEIGHT_LABEL"
 					description="COM_GAMES_CATEGORY_FIELD_HEIGHT_DESC"
-					required="true"
-					validate="positive"
-					default="165" />
+					validate="positive" />
 
 				<field
 					name="default_boxart"
