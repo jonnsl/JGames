@@ -9,7 +9,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
-JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'helpers'.DS.'html');
+JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 JHtml::_('stylesheet', 'games/game'.(JDEBUG ? '' : '.min').'.css', array(), true);
 $game = $this->item;
 ?>

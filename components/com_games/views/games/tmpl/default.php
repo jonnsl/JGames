@@ -9,7 +9,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
-JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'helpers'.DS.'html');
+JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 JHtml::_('stylesheet', 'games/games'.(JDEBUG ? '' : '.min').'.css', array(), true);
 JHtml::_('script', 'games/games'.(JDEBUG ? '' : '.min').'.js', true, true);
 ?>

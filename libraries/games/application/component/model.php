@@ -166,7 +166,7 @@ class JGModel extends JObject
 		if (isset($config['table_path'])) {
 			$this->addTablePath($config['table_path']);
 		} else if (defined('JPATH_COMPONENT_ADMINISTRATOR')){
-			$this->addTablePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
+			$this->addTablePath(JPATH_COMPONENT_ADMINISTRATOR.'/tables');
 		}
 
 		// Set the internal state marker - used to ignore setting state from the request

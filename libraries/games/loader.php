@@ -30,7 +30,7 @@ function JGImport($filePath, $prefix = true)
 				break;
 		}
 
-		$path = str_replace('.', DS, $filePath);
+		$path = str_replace('.', '/', $filePath);
 
 		// we are loading a JGames class prepend the classname with a capital JG.
 		if ($prefix) $className = 'JG'.$className;
